@@ -1,0 +1,4 @@
+extends Node
+class_name AnimationDataCollection
+
+var animation_data_collection:Array[AnimationData]
