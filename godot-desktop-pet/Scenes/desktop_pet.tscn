@@ -1,19 +1,19 @@
 [gd_scene format=3 uid="uid://dkyvq7llkhfjl"]
 
-[ext_resource type="Script" uid="uid://560muyhjm74r" path="res://TransparencyWindow.cs" id="1_pod7j"]
-[ext_resource type="Texture2D" uid="uid://1a80skx48fj1" path="res://Characters/Donqui/Sprites/Animations/Idle/Idle_1.png" id="2_ka74a"]
-[ext_resource type="Script" uid="uid://cshigjlwu0gq3" path="res://pet_visual.gd" id="3_jqpbf"]
-[ext_resource type="Script" uid="uid://cdwrljn85g2u6" path="res://WindowsDll.cs" id="4_fsrqt"]
-[ext_resource type="Script" uid="uid://c3ljpo8a7yqrv" path="res://animations.gd" id="4_gfd2c"]
-[ext_resource type="Script" uid="uid://dlkbjfc12af5c" path="res://resolution_fix.gd" id="5_dv0nn"]
-[ext_resource type="Script" uid="uid://c4yaonskl7s6y" path="res://popup_menu.gd" id="6_dv0nn"]
-[ext_resource type="Script" uid="uid://bkm4g820x46mb" path="res://screen_borders.gd" id="7_w2kv1"]
-[ext_resource type="Script" uid="uid://df3ax1v8pympa" path="res://HideFromTaskbar.cs" id="8_fabbr"]
+[ext_resource type="Script" uid="uid://560muyhjm74r" path="res://Scripts/TransparencyWindow.cs" id="1_58r7q"]
+[ext_resource type="Texture2D" uid="uid://1a80skx48fj1" path="res://Characters/Donqui/Sprites/Animations/Idle/Idle_1.png" id="2_2puce"]
+[ext_resource type="Script" uid="uid://cshigjlwu0gq3" path="res://Scripts/pet_visual.gd" id="3_s4m3q"]
+[ext_resource type="Script" uid="uid://c3ljpo8a7yqrv" path="res://Scripts/animations.gd" id="4_nmtrc"]
+[ext_resource type="Script" uid="uid://cdwrljn85g2u6" path="res://Scripts/WindowsDll.cs" id="5_1a812"]
+[ext_resource type="Script" uid="uid://dlkbjfc12af5c" path="res://Scripts/resolution_fix.gd" id="6_dmnoo"]
+[ext_resource type="Script" uid="uid://c4yaonskl7s6y" path="res://Scripts/popup_menu.gd" id="7_euxxh"]
+[ext_resource type="Script" uid="uid://bkm4g820x46mb" path="res://Scripts/screen_borders.gd" id="8_xbbij"]
+[ext_resource type="Script" uid="uid://df3ax1v8pympa" path="res://Scripts/HideFromTaskbar.cs" id="9_fa3vf"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fabbr"]
 
 [node name="DesktopPet" type="Node2D" unique_id=1682899498]
-script = ExtResource("1_pod7j")
+script = ExtResource("1_58r7q")
 
 [node name="Pet" type="Node2D" parent="." unique_id=1462368491]
 position = Vector2(336, 190)
@@ -21,21 +21,25 @@ position = Vector2(336, 190)
 [node name="Visuals" type="Sprite2D" parent="Pet" unique_id=1944598363]
 texture_filter = 1
 position = Vector2(70, 256)
-texture = ExtResource("2_ka74a")
-script = ExtResource("3_jqpbf")
+texture = ExtResource("2_2puce")
+script = ExtResource("3_s4m3q")
+drag_offset = 20.0
 
 [node name="Animations" type="Node2D" parent="Pet/Visuals" unique_id=1519268060]
-script = ExtResource("4_gfd2c")
+script = ExtResource("4_nmtrc")
 current_character = "Donqui"
 current_animation = "Yap"
+
+[node name="DialogueBoxPosition" type="Node2D" parent="Pet/Visuals" unique_id=1068813606]
+position = Vector2(72, 0)
 
 [node name="NotPlayerStuff" type="Node2D" parent="." unique_id=964059842]
 
 [node name="WindowsDLL" type="Node2D" parent="NotPlayerStuff" unique_id=2129481452]
-script = ExtResource("4_fsrqt")
+script = ExtResource("5_1a812")
 
 [node name="ResolutionFix" type="Node2D" parent="NotPlayerStuff" unique_id=19668798]
-script = ExtResource("5_dv0nn")
+script = ExtResource("6_dmnoo")
 
 [node name="StatusIndicator" type="StatusIndicator" parent="NotPlayerStuff" unique_id=140505757]
 icon = SubResource("CompressedTexture2D_fabbr")
@@ -48,13 +52,13 @@ title = "Options"
 item_count = 1
 item_0/text = "Quit"
 item_0/id = 0
-script = ExtResource("6_dv0nn")
+script = ExtResource("7_euxxh")
 
 [node name="ScreenBorders" type="StaticBody2D" parent="NotPlayerStuff" unique_id=934954857]
-script = ExtResource("7_w2kv1")
+script = ExtResource("8_xbbij")
 
 [node name="HideFromTaskbar" type="Node2D" parent="NotPlayerStuff" unique_id=1835959338]
-script = ExtResource("8_fabbr")
+script = ExtResource("9_fa3vf")
 
 [connection signal="pet_right_clicked" from="Pet/Visuals" to="Pet/Visuals/Animations" method="_on_visuals_pet_right_clicked"]
 [connection signal="play_animation" from="Pet/Visuals/Animations" to="Pet/Visuals" method="_on_animations_play_animation"]

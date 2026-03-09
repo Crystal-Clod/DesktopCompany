@@ -15,6 +15,10 @@ run/main_scene="uid://dkyvq7llkhfjl"
 config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DialogueManager="*uid://bwiga4eh7ppx8"
+
 [display]
 
 window/size/viewport_width=800

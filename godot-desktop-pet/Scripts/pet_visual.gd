@@ -7,64 +7,94 @@ var rng = RandomNumberGenerator.new()
 
 const SPEED:int = 50
 
-var has_mouse:bool = false
-var is_dragging:bool = false
+var mouse_offset:Vector2
+var click_position:Vector2
 
 var is_running : bool
 
+enum  Status {
+	None,
+	Selected,
+	Dragging
+}
+
+var is_mouse_hovering : bool = false
+var is_yapping : bool = false
+
+var sprite_status : Status
+@export var drag_offset: float = 0.5
+
 var current_scale_step : Vector2 = Vector2(4.0,4.0)
+var current_animation : AnimationData
 
 func  _ready():
 	_tween_scale()
 	pass
+	
 func _input(event):
 	if is_pixel_opaque(get_local_mouse_position()):
-		has_mouse = true
-	elif !is_dragging:
-		has_mouse = false
+		is_mouse_hovering = true
+	elif sprite_status == Status.None:
+		is_mouse_hovering = false
 		
-	#if event.is_action_pressed("click"):
-		#if has_mouse:
-		#if is_pixel_opaque(get_local_mouse_position()):
+		
 func _process(delta):
-	if !has_mouse:
-		is_dragging = false
+	
+	if Input.is_action_just_released("click"):
+		if sprite_status == Status.Selected:
+			DialogueManager._dialogue($DialogueBoxPosition.global_position, 
+			["Really long dialogue test to test this goddang system","Hella long test to test this thing"], get_node("DialogueBoxPosition"))
+			
+		sprite_status = Status.None
+			
+	if !is_mouse_hovering:
 		return
 		
-	if Input.is_action_pressed("click"):
+	if Input.is_action_just_pressed("click"):
 		pet_clicked.emit()
-		is_dragging = true
-		global_position = global_position.lerp(get_global_mouse_position(), SPEED*delta)
+		sprite_status = Status.Selected
+		click_position = position - get_global_mouse_position()
+		
+	
+	
+	if sprite_status == Status.Selected:
+		if click_position.distance_to(position - get_global_mouse_position()) > drag_offset:
+			mouse_offset = position - get_global_mouse_position()
+			sprite_status = Status.Dragging
+		
+	if sprite_status == Status.Dragging:
+		#global_position = global_position.lerp(get_global_mouse_position(), SPEED*delta)
+		#global_position = get_global_mouse_position() + mouse_offset
+		position = get_global_mouse_position() + mouse_offset
+		
 	
 	if Input.is_action_just_pressed("right_click"):
 		pet_right_clicked.emit()
 		
+		
 	if Input.is_action_just_pressed("scroll_up"):
-		print("Scrolling up")
 		if(current_scale_step.x > 0.25):
 			current_scale_step = current_scale_step/2
 			_tween_scale()
-			#scale = current_scale_step
+			
 	elif Input.is_action_just_pressed("scroll_down"):
-		print("Scrolling down")
 		if(current_scale_step.x < 16):
 			current_scale_step = current_scale_step*2
 			_tween_scale()
-			#scale = current_scale_step
 
 func  _tween_scale():
 	var tween = get_tree().create_tween()
 	tween.tween_property($".","scale", current_scale_step, 0.2)
 
 	
-func animate_via_code():
+func _animate_via_code():
 	await  get_tree().create_timer(1.0/6.0).timeout
 	if(frame >= hframes -1):
 		frame = 0
 	else:
 		frame += 1
 	
-	animate_via_code()	
+	_animate_via_code()	
 	
 	
 ###CHECK FOR TRANSPARENCY IF I EVER WANT GRIDS
@@ -78,9 +108,13 @@ func animate_via_code():
 
 
 func _on_animations_play_animation(animation_data):
+	if animation_data == current_animation:
+		return
+	
+	current_animation = animation_data
 	frame = 0
 	texture = animation_data.spritesheet
 	hframes = animation_data.frame_amount
 	if(!is_running):
 		is_running = true
-		animate_via_code()
+		_animate_via_code()

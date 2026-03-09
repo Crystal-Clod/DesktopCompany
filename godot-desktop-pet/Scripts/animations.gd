@@ -10,8 +10,14 @@ signal play_animation (animation_data:AnimationData)
 @export var all_animations: Dictionary[String,AnimationDataCollection]
 
 var can_blink = true
+var blink_is_running = false
 
 func _ready():
+	DialogueManager.finished_dialogue.connect(_finished_dialogue)
+	DialogueManager.finished_displaying.connect(_finished_dialogue)
+	
+	DialogueManager.talking_starts.connect(_start_talking)
+	
 	var animation_directories = ResourceLoader.list_directory("res://Characters/" + current_character + "/Sprites/Animations/")
 	print(animation_directories)
 	for animation in animation_directories:
@@ -64,12 +70,14 @@ func _load_json(json_name : String):
 	print(parsed_result.rarity)
 
 func _blink():
-	
+	blink_is_running = true
 	if(!can_blink):
+		blink_is_running = false
 		return
 	play_animation.emit(_get_animation_data_collection("Idle",0))
 	await  get_tree().create_timer(rng.randf_range(0.5,3)).timeout
 	if(!can_blink):
+		blink_is_running = false
 		return
 	play_animation.emit(_get_animation_data_collection("Blink",0))
 	await  get_tree().create_timer(_get_animation_data_collection("Blink",0).frame_amount/6.0).timeout
@@ -79,10 +87,21 @@ func _blink():
 func _get_animation_data_collection(collection : String, which_collection : int):
 	return all_animations.get(collection).animation_data_collection[which_collection]
 
-func _on_visuals_pet_right_clicked():
-	if(can_blink):
-		can_blink = false
-		play_animation.emit(all_animations.get("Yap").animation_data_collection[0])
-	else :
-		can_blink = true
+#func _on_visuals_pet_right_clicked():
+	#if(can_blink):
+		#can_blink = false
+		#play_animation.emit(all_animations.get("Yap").animation_data_collection[0])
+	#else :
+		#can_blink = true
+		#_blink()
+
+func  _finished_dialogue():
+	can_blink = true
+	if(!blink_is_running):
 		_blink()
+	
+	
+
+func _start_talking():
+	play_animation.emit(all_animations.get("Yap").animation_data_collection[0])
+	can_blink = false
