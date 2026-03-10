@@ -10,8 +10,6 @@
 [ext_resource type="Script" uid="uid://bkm4g820x46mb" path="res://Scripts/screen_borders.gd" id="8_xbbij"]
 [ext_resource type="Script" uid="uid://df3ax1v8pympa" path="res://Scripts/HideFromTaskbar.cs" id="9_fa3vf"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fabbr"]
-
 [node name="DesktopPet" type="Node2D" unique_id=1682899498]
 script = ExtResource("1_58r7q")
 
@@ -42,7 +40,7 @@ script = ExtResource("5_1a812")
 script = ExtResource("6_dmnoo")
 
 [node name="StatusIndicator" type="StatusIndicator" parent="NotPlayerStuff" unique_id=140505757]
-icon = SubResource("CompressedTexture2D_fabbr")
+icon = ExtResource("2_2puce")
 menu = NodePath("PopupMenu")
 
 [node name="PopupMenu" type="PopupMenu" parent="NotPlayerStuff/StatusIndicator" unique_id=77807322]

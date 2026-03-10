@@ -1,5 +1,7 @@
 extends Node
 
+#from https://www.youtube.com/watch?v=1DRy5An_6DU
+
 signal finished_dialogue
 signal finished_displaying
 
