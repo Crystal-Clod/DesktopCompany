@@ -1,4 +1,7 @@
 extends Sprite2D
+@export var rigid_body_2d: RigidBody2D
+@export var pet: Node2D
+
 
 signal pet_clicked
 signal pet_right_clicked
@@ -24,21 +27,21 @@ var is_yapping : bool = false
 var sprite_status : Status
 @export var drag_offset: float = 0.5
 
-var current_scale_step : Vector2 = Vector2(4.0,4.0)
+var current_scale_step : Vector2 = Vector2(1.0,1.0)
 var current_animation : AnimationData
 
 func  _ready():
 	_tween_scale()
 	pass
 	
-func _input(event):
+func _input(_event):
 	if is_pixel_opaque(get_local_mouse_position()):
 		is_mouse_hovering = true
 	elif sprite_status == Status.None:
 		is_mouse_hovering = false
 		
 		
-func _process(delta):
+func _process(_delta):
 	
 	if Input.is_action_just_released("click"):
 		if sprite_status == Status.Selected:
@@ -58,14 +61,16 @@ func _process(delta):
 	
 	
 	if sprite_status == Status.Selected:
-		if click_position.distance_to(position - get_global_mouse_position()) > drag_offset:
-			mouse_offset = position - get_global_mouse_position()
+		if click_position.distance_to(global_position - get_global_mouse_position()) > drag_offset:
+			mouse_offset = global_position - get_global_mouse_position()
 			sprite_status = Status.Dragging
 		
 	if sprite_status == Status.Dragging:
 		#global_position = global_position.lerp(get_global_mouse_position(), SPEED*delta)
 		#global_position = get_global_mouse_position() + mouse_offset
-		position = get_global_mouse_position() + mouse_offset
+		
+		#
+		rigid_body_2d.position = get_global_mouse_position() + mouse_offset - texture.get_size()*2
 		
 	
 	if Input.is_action_just_pressed("right_click"):
@@ -105,7 +110,6 @@ func _animate_via_code():
 		#for y in range(area.position.y, area.end.y):
 			#if Color.TRANSPARENT != image.get_pixel(x, y): return false
 		#return true
-
 
 func _on_animations_play_animation(animation_data):
 	if animation_data == current_animation:
