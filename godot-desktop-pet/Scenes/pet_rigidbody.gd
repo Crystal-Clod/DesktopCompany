@@ -12,6 +12,7 @@ var clear_button = _clear_polygons
 
 
 func _ready() -> void:
+	_clear_polygons()
 	_sprite_to_polygon()
 	pass
 	
@@ -44,8 +45,10 @@ func _sprite_to_polygon() -> void:
 			
 		collision_polygon.polygon = poly
 		
+		
 		add_child(collision_polygon)
-		collision_polygon.owner = self.get_parent()
+		collision_polygon.owner = owner
+		collision_polygon.set_script("res://Scripts/collision_shape_scaling.gd")
 		
 		# Generated polygon will not take into account the half-width and half-height offset
 		# of the image when "centered" is on. So move it backwards by this amount so it lines up.

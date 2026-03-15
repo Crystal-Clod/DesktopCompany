@@ -16,7 +16,6 @@
 script = ExtResource("1_58r7q")
 
 [node name="Pet" type="Node2D" parent="." unique_id=1462368491]
-position = Vector2(336, 190)
 script = ExtResource("2_s4m3q")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="Pet" unique_id=1687979387]
@@ -39,7 +38,7 @@ current_character = "Donqui"
 current_animation = "Yap"
 
 [node name="DialogueBoxPosition" type="Node2D" parent="Pet/RigidBody2D/Visuals" unique_id=1068813606]
-position = Vector2(72, 0)
+position = Vector2(125, 0)
 
 [node name="NotPlayerStuff" type="Node2D" parent="." unique_id=964059842]
 
@@ -68,6 +67,7 @@ script = ExtResource("8_xbbij")
 [node name="HideFromTaskbar" type="Node2D" parent="NotPlayerStuff" unique_id=1835959338]
 script = ExtResource("9_fa3vf")
 
+[connection signal="change_scale" from="Pet" to="Pet/RigidBody2D/Visuals" method="_on_pet_change_scale"]
 [connection signal="pet_right_clicked" from="Pet/RigidBody2D/Visuals" to="Pet/RigidBody2D/Visuals/Animations" method="_on_visuals_pet_right_clicked"]
 [connection signal="play_animation" from="Pet/RigidBody2D/Visuals/Animations" to="Pet/RigidBody2D/Visuals" method="_on_animations_play_animation"]
 [connection signal="index_pressed" from="NotPlayerStuff/StatusIndicator/PopupMenu" to="NotPlayerStuff/StatusIndicator/PopupMenu" method="_on_index_pressed"]

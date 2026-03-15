@@ -31,7 +31,6 @@ var current_scale_step : Vector2 = Vector2(1.0,1.0)
 var current_animation : AnimationData
 
 func  _ready():
-	_tween_scale()
 	pass
 	
 func _input(_event):
@@ -61,7 +60,7 @@ func _process(_delta):
 	
 	
 	if sprite_status == Status.Selected:
-		if click_position.distance_to(global_position - get_global_mouse_position()) > drag_offset:
+		if click_position.distance_to(position - get_global_mouse_position()) > drag_offset:
 			mouse_offset = global_position - get_global_mouse_position()
 			sprite_status = Status.Dragging
 		
@@ -70,7 +69,7 @@ func _process(_delta):
 		#global_position = get_global_mouse_position() + mouse_offset
 		
 		#
-		rigid_body_2d.position = get_global_mouse_position() + mouse_offset - texture.get_size()*2
+		rigid_body_2d.position = get_global_mouse_position() + mouse_offset
 		
 	
 	if Input.is_action_just_pressed("right_click"):
@@ -78,14 +77,10 @@ func _process(_delta):
 		
 		
 	if Input.is_action_just_pressed("scroll_up"):
-		if(current_scale_step.x > 0.25):
-			current_scale_step = current_scale_step/2
-			_tween_scale()
+		pet._decrease_scale()
 			
 	elif Input.is_action_just_pressed("scroll_down"):
-		if(current_scale_step.x < 16):
-			current_scale_step = current_scale_step*2
-			_tween_scale()
+		pet._increase_scale()
 
 func  _tween_scale():
 	var tween = get_tree().create_tween()
@@ -122,3 +117,8 @@ func _on_animations_play_animation(animation_data):
 	if(!is_running):
 		is_running = true
 		_animate_via_code()
+
+
+func _on_pet_change_scale(current_scale: Vector2) -> void:
+	current_scale_step = current_scale
+	_tween_scale()
