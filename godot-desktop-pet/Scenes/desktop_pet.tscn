@@ -68,6 +68,7 @@ script = ExtResource("8_xbbij")
 script = ExtResource("9_fa3vf")
 
 [connection signal="change_scale" from="Pet" to="Pet/RigidBody2D/Visuals" method="_on_pet_change_scale"]
+[connection signal="dragging_state" from="Pet" to="Pet/RigidBody2D" method="_on_pet_dragging_state"]
 [connection signal="pet_right_clicked" from="Pet/RigidBody2D/Visuals" to="Pet/RigidBody2D/Visuals/Animations" method="_on_visuals_pet_right_clicked"]
 [connection signal="play_animation" from="Pet/RigidBody2D/Visuals/Animations" to="Pet/RigidBody2D/Visuals" method="_on_animations_play_animation"]
 [connection signal="index_pressed" from="NotPlayerStuff/StatusIndicator/PopupMenu" to="NotPlayerStuff/StatusIndicator/PopupMenu" method="_on_index_pressed"]

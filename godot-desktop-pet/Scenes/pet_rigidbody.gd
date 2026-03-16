@@ -10,8 +10,11 @@ var button = _sprite_to_polygon
 @export_tool_button("Clear All Polygons")
 var clear_button = _clear_polygons
 
+var dragging_mouse_position : Vector2
 
 func _ready() -> void:
+	#UNCOMMENT THIS TO SEE COLLISIONS
+	#get_tree().debug_collisions_hint = true
 	_clear_polygons()
 	_sprite_to_polygon()
 	pass
@@ -40,6 +43,7 @@ func _sprite_to_polygon() -> void:
 	
 	for poly in polys:
 		var collision_polygon = CollisionPolygon2D.new()
+		
 		if snap_distance > 0:
 			poly = _clean_polygon(poly)
 			
@@ -48,7 +52,8 @@ func _sprite_to_polygon() -> void:
 		
 		add_child(collision_polygon)
 		collision_polygon.owner = owner
-		collision_polygon.set_script("res://Scripts/collision_shape_scaling.gd")
+		collision_polygon.set_script(CollisionShapeScaling)
+		collision_polygon._initialize($"..", sprite)
 		
 		# Generated polygon will not take into account the half-width and half-height offset
 		# of the image when "centered" is on. So move it backwards by this amount so it lines up.
@@ -67,3 +72,17 @@ func _clean_polygon(points : PackedVector2Array) -> PackedVector2Array:
 			cleaned.pop_back()
 		return PackedVector2Array(cleaned)
 			
+
+
+func _on_pet_dragging_state(is_dragging: bool) -> void:
+	freeze = is_dragging
+	
+	if !freeze:
+		var throw_vector : Vector2 = get_global_mouse_position() - global_position
+		var mouse_distance = dragging_mouse_position.distance_to(get_global_mouse_position())
+		
+		print(mouse_distance)
+		
+		linear_velocity = throw_vector.normalized() * (mouse_distance * 25)
+	else:
+		dragging_mouse_position = get_global_mouse_position()

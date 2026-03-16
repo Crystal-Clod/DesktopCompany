@@ -44,8 +44,11 @@ func _process(_delta):
 	
 	if Input.is_action_just_released("click"):
 		if sprite_status == Status.Selected:
+			
 			DialogueManager._dialogue($DialogueBoxPosition.global_position, 
 			["Really long dialogue test to test this goddang system","Hella long test to test this thing"], get_node("DialogueBoxPosition"))
+		if sprite_status == Status.Dragging:
+			pet.emit_signal("dragging_state", false)
 			
 		sprite_status = Status.None
 			
@@ -65,10 +68,10 @@ func _process(_delta):
 			sprite_status = Status.Dragging
 		
 	if sprite_status == Status.Dragging:
+		#FIX THIS LATER SO IT DRAGS BEHIND NICELY
 		#global_position = global_position.lerp(get_global_mouse_position(), SPEED*delta)
 		#global_position = get_global_mouse_position() + mouse_offset
-		
-		#
+		pet.emit_signal("dragging_state", true)
 		rigid_body_2d.position = get_global_mouse_position() + mouse_offset
 		
 	
