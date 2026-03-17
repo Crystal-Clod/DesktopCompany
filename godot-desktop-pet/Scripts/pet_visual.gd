@@ -2,6 +2,7 @@ extends Sprite2D
 @export var rigid_body_2d: RigidBody2D
 @export var pet: Node2D
 
+@export var dialogue_resource_test : DialogueResource
 
 signal pet_clicked
 signal pet_right_clicked
@@ -31,6 +32,8 @@ var current_scale_step : Vector2 = Vector2(1.0,1.0)
 var current_animation : AnimationData
 
 func  _ready():
+	var dialogue_position = Vector2((texture.get_size().x/2) * scale.x, 0.0)
+	get_node("DialogueBoxPosition").position = dialogue_position
 	pass
 	
 func _input(_event):
@@ -44,9 +47,8 @@ func _process(_delta):
 	
 	if Input.is_action_just_released("click"):
 		if sprite_status == Status.Selected:
-			
-			DialogueManager._dialogue($DialogueBoxPosition.global_position, 
-			["Really long dialogue test to test this goddang system","Hella long test to test this thing"], get_node("DialogueBoxPosition"))
+			DialogueManager._dialogue(dialogue_resource_test, 
+			get_node("DialogueBoxPosition"))
 		if sprite_status == Status.Dragging:
 			pet.emit_signal("dragging_state", false)
 			

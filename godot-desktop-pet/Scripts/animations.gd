@@ -102,6 +102,9 @@ func  _finished_dialogue():
 	
 	
 
-func _start_talking():
-	play_animation.emit(all_animations.get("Yap").animation_data_collection[0])
+func _start_talking(animation_name : String):
+	if animation_name == "":
+		animation_name = "Yap"
+		
+	play_animation.emit(all_animations.get(animation_name).animation_data_collection[0])
 	can_blink = false

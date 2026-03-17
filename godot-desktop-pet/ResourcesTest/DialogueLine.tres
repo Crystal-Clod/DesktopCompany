@@ -5,5 +5,4 @@
 [resource]
 script = ExtResource("1_mw2b3")
 line = "Salutations Executive Manager!"
-animation_name = "Idle"
 metadata/_custom_type_script = "uid://b73nsvkrprv2l"

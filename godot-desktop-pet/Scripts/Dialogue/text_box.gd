@@ -22,9 +22,9 @@ signal  finished_displaying()
 	#if Input.is_action_just_released("click"):
 		#DialogueManager._continue_dialogue()
 
-func  _display_text(text_to_display : String):
-	text = text_to_display
-	label.text = text_to_display
+func  _display_text(dialogue_line : DialogueLine):
+	text = dialogue_line.line
+	label.text = dialogue_line.line
 	
 	await  resized
 	#await get_tree().process_frame
@@ -36,8 +36,8 @@ func  _display_text(text_to_display : String):
 		await  resized
 		await  resized
 		custom_minimum_size.y = size.y
-	global_position.x -= size.x / 2
-	global_position.y -= size.y
+	#global_position.x -= size.x / 2
+	#global_position.y -= size.y
 	
 	label.text = text
 	label.visible_characters = 0
@@ -48,12 +48,12 @@ func  _display_letter():
 	
 	label.visible_characters += 1
 	
-	#letter_index += 1
+	letter_index = label.visible_characters - 1
 	
 	if(label.visible_characters >= text.length()):
 		finished_displaying.emit()
 		return
-		
+	
 	match  text[letter_index]:
 		"!", ".", ",", "?":
 			timer.start(punctuation_time)
