@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bxf0mdwimy5pq"]
 
 [ext_resource type="Texture2D" uid="uid://c7m5j7uqg0u1x" path="res://Characters/Donqui/Sprites/TextBox/TextBox.png" id="1_1u4do"]
-[ext_resource type="Script" uid="uid://nneuuebaujk0" path="res://Scripts/text_box.gd" id="1_45ox4"]
+[ext_resource type="Script" uid="uid://nneuuebaujk0" path="res://Scripts/Dialogue/text_box.gd" id="1_45ox4"]
 [ext_resource type="FontFile" uid="uid://dp3pyum7miuwb" path="res://Characters/Donqui/Sprites/TextBox/windows-xp-tahoma.otf" id="3_joub5"]
 
 [node name="TextBox" type="MarginContainer" unique_id=1252097381]

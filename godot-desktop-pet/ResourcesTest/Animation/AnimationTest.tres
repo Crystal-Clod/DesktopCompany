@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AnimationData" format=3 uid="uid://b4fi50nfleuy"]
+
+[ext_resource type="Script" uid="uid://c2f58r2jur6le" path="res://Scripts/animation_data.gd" id="1_jqldy"]
+[ext_resource type="Texture2D" uid="uid://1a80skx48fj1" path="res://Characters/Donqui/Sprites/Animations/Idle/Idle_1.png" id="2_fi536"]
+
+[resource]
+script = ExtResource("1_jqldy")
+animation_name = "Idle_1"
+animation_type = "Yap"
+file_name = "Idle_1.png"
+frame_amount = 1
+spritesheet = ExtResource("2_fi536")
+metadata/_custom_type_script = "uid://c2f58r2jur6le"

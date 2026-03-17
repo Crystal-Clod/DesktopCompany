@@ -75,13 +75,12 @@ func _clean_polygon(points : PackedVector2Array) -> PackedVector2Array:
 
 
 func _on_pet_dragging_state(is_dragging: bool) -> void:
+	return
 	freeze = is_dragging
 	
 	if !freeze:
 		var throw_vector : Vector2 = get_global_mouse_position() - global_position
 		var mouse_distance = dragging_mouse_position.distance_to(get_global_mouse_position())
-		
-		print(mouse_distance)
 		
 		linear_velocity = throw_vector.normalized() * (mouse_distance * 25)
 	else:

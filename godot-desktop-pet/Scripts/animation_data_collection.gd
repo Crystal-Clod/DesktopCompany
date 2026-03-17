@@ -1,4 +1,4 @@
-extends Node
+extends Resource
 class_name AnimationDataCollection
 
-var animation_data_collection:Array[AnimationData]
+@export var animation_data_collection:Array[AnimationData]

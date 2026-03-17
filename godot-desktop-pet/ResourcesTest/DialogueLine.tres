@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueLine" format=3 uid="uid://bnm45b7sklgl5"]
+
+[ext_resource type="Script" uid="uid://b73nsvkrprv2l" path="res://Scripts/Dialogue/dialogue_line.gd" id="1_mw2b3"]
+
+[resource]
+script = ExtResource("1_mw2b3")
+line = "Salutations Executive Manager!"
+animation_name = "Idle"
+metadata/_custom_type_script = "uid://b73nsvkrprv2l"

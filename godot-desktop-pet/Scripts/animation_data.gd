@@ -1,4 +1,4 @@
-extends Node
+extends Resource
 class_name AnimationData
 
 @export var animation_name: String
