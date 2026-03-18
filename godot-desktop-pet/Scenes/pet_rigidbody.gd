@@ -15,6 +15,10 @@ var dragging_mouse_position : Vector2
 func _ready() -> void:
 	#UNCOMMENT THIS TO SEE COLLISIONS
 	#get_tree().debug_collisions_hint = true
+
+	if Engine.is_editor_hint():
+		return
+		
 	_clear_polygons()
 	_sprite_to_polygon()
 	pass

@@ -5,4 +5,5 @@
 [resource]
 script = ExtResource("1_mw2b3")
 line = "Salutations Executive Manager!"
+save_load_path = "res://Characters/Donqui/Resources/"
 metadata/_custom_type_script = "uid://b73nsvkrprv2l"

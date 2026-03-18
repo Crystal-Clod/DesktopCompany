@@ -11,7 +11,6 @@ signal talking_starts (animation_name : String)
 
 var current_dialogue : DialogueResource
 var current_line_index = 0
-
 var text_box : TextBox
 
 var is_dialogue_active = false
