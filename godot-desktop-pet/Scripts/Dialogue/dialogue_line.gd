@@ -6,11 +6,16 @@ class_name DialogueLine
 @export var talking_animation : String
 @export var idling_animation : String
 
-@export var save_load_path : String
 @export_tool_button("Save To Json")
 var button = _save_to_json
 
 func _save_to_json():
-	JsonOperations.save_json(self)
+	
+	var json_data : Dictionary = {
+		"line" : line,
+		"talking_animation" : talking_animation,
+		"idling_animation" : idling_animation
+	}
+	JsonOperations.save_json(json_data, self.resource_path)
 	#JsonOperations._save_json(DialogueLine)
 	pass

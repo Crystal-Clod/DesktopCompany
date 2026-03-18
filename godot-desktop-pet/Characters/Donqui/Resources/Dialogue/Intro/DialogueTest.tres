@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" uid="uid://b73nsvkrprv2l" path="res://Scripts/Dialogue/dialogue_line.gd" id="1_ssem3"]
 [ext_resource type="Script" uid="uid://boq7o6h65lalm" path="res://Scripts/Dialogue/dialogue_resource.gd" id="2_ssem3"]
-[ext_resource type="Resource" uid="uid://bnm45b7sklgl5" path="res://ResourcesTest/DialogueLine.tres" id="2_y4bqm"]
+[ext_resource type="Resource" uid="uid://bnm45b7sklgl5" path="res://Characters/Donqui/Resources/Dialogue/Intro/DialogueLine.tres" id="2_y4bqm"]
 
 [sub_resource type="Resource" id="Resource_ssem3"]
 script = ExtResource("1_ssem3")
 line = "Tis' just a little test, so during my next line I shall speak without moving mine mouth."
+save_load_path = ""
 metadata/_custom_type_script = "uid://b73nsvkrprv2l"
 
 [sub_resource type="Resource" id="Resource_y4bqm"]
@@ -15,6 +16,7 @@ line = "Observe and marvel at my skills!
 ...
 Tis done!"
 talking_animation = "Idle"
+save_load_path = ""
 metadata/_custom_type_script = "uid://b73nsvkrprv2l"
 
 [resource]

@@ -1,11 +1,25 @@
 class_name JsonOperations
 
-static func save_json(_object : Resource):
-	if _object is DialogueLine:
-		_save_dialogue_line(_object)
-		
+static  func save_json(_json_data, _path : String):
+	_path = _path.trim_suffix(_path.get_extension())
+	_path = _path + "json"
 	
-
-static func _save_dialogue_line(_dialogue : DialogueLine):
-	print("It's dialogue with this funny line: " + _dialogue.line)
+	if FileAccess.file_exists(_path):
+		print("overwriting...")
+	else:
+		print("making new file")
+		
+	var file = FileAccess.open(_path, FileAccess.ModeFlags.WRITE)
+	
+	if file:
+		var json_text = JSON.stringify(_json_data, "\t")
+		file.store_string(json_text)
+		print("finished writing data")
+	else:
+		printerr("data writing failure")
 	pass
+
+static func load_json(json_name : String, _path : String) -> Dictionary:
+	var data_file = FileAccess.open(_path, FileAccess.READ)
+	var parsed_result = JSON.parse_string(data_file.get_as_text())
+	return parsed_result

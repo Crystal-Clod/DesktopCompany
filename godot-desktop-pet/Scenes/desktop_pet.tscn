@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://cdwrljn85g2u6" path="res://Scripts/WindowsDll.cs" id="5_1a812"]
 [ext_resource type="Script" uid="uid://dbngoo47aks2" path="res://Scenes/pet_rigidbody.gd" id="5_2puce"]
 [ext_resource type="Script" uid="uid://dlkbjfc12af5c" path="res://Scripts/resolution_fix.gd" id="6_dmnoo"]
-[ext_resource type="Resource" uid="uid://cy0pc1qyglcvr" path="res://ResourcesTest/DialogueTest.tres" id="6_nmtrc"]
+[ext_resource type="Resource" uid="uid://cy0pc1qyglcvr" path="res://Characters/Donqui/Resources/Dialogue/Intro/DialogueTest.tres" id="6_nmtrc"]
 [ext_resource type="Script" uid="uid://c4yaonskl7s6y" path="res://Scripts/popup_menu.gd" id="7_euxxh"]
 [ext_resource type="Script" uid="uid://bkm4g820x46mb" path="res://Scripts/screen_borders.gd" id="8_xbbij"]
 [ext_resource type="Script" uid="uid://df3ax1v8pympa" path="res://Scripts/HideFromTaskbar.cs" id="9_fa3vf"]
