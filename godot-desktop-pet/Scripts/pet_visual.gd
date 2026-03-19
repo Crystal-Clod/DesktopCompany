@@ -1,6 +1,6 @@
 extends Sprite2D
 @export var rigid_body_2d: RigidBody2D
-@export var pet: Node2D
+@export var pet: Pet
 
 @export var dialogue_resource_test : DialogueResource
 
@@ -31,7 +31,13 @@ var sprite_status : Status
 var current_scale_step : Vector2 = Vector2(1.0,1.0)
 var current_animation : AnimationData
 
+#var dialogue_set : DialogueSet
+
 func  _ready():
+	#var dialogue_set_data = JsonOperations.load_json(
+			#"res://Characters/Donqui/Resources/Dialogue/Intro/DialogueSetTest.json")
+	#dialogue_set = DialogueSet.new()
+	#dialogue_set.load_from_json(dialogue_set_data)
 	var dialogue_position = Vector2((texture.get_size().x/2) * scale.x, 0.0)
 	get_node("DialogueBoxPosition").position = dialogue_position
 	pass
@@ -47,13 +53,7 @@ func _process(_delta):
 	
 	if Input.is_action_just_released("click"):
 		if sprite_status == Status.Selected:
-			var dialogue_set_data = JsonOperations.load_json("DialogueSetTest.json", 
-			"res://Characters/Donqui/Resources/Dialogue/Intro/DialogueSetTest.json")
-			var dialogue_set : DialogueSet = DialogueSet.new()
-			dialogue_set.load_from_json(dialogue_set_data)
-			
-			
-			var dialogue : DialogueResource = dialogue_set.dialogues[randi_range(0,len(dialogue_set.dialogues) -1 )]
+			var dialogue : DialogueResource = pet.get_random_dialogue_from_set("Intro")
 			DialogueManager._dialogue(dialogue, 
 			get_node("DialogueBoxPosition"))
 			#DialogueManager._dialogue(dialogue_resource_test, 

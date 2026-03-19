@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 
 class_name Pet
@@ -9,6 +10,35 @@ signal dragging_state(is_dragging : bool)
 @export_custom(PROPERTY_HINT_LINK,"") var current_scale_step : Vector2 = Vector2(1.0,1.0)
 @export var step_size : float = 2
 
+@export_tool_button("Test Dictionary")
+var button = refresh_dictionary
+@export var dialogue_dictionary : Dictionary
+
+func _init() -> void:
+	refresh_dictionary()
+	pass
+
+func get_random_dialogue_from_set(_set_name : String):
+	var dialogue_sets : Array[DialogueSet] = dialogue_dictionary.get("Intro")
+	var dialogue_set = dialogue_sets[randi_range(0,len(dialogue_sets) -1)] 
+	var dialogue = dialogue_set.dialogues[randi_range(0,len(dialogue_set.dialogues) -1)]
+	return dialogue 
+func refresh_dictionary():
+	var files = FileOperations.get_all_files_of_type_from_directory("res://Characters/Donqui/Resources/Dialogue/Intro/","json")
+	print(files)
+	
+	var resources : Array[DialogueSet]
+	for file in files:
+		var json = JsonOperations.load_json(file)
+		
+		var dialogue_set : DialogueSet = DialogueSet.new()
+		dialogue_set.load_from_json(json)
+		print(dialogue_set)
+		resources.append(dialogue_set)
+	pass
+	
+	dialogue_dictionary.get_or_add("Intro",resources)
+	
 func _ready() -> void:
 	emit_signal("change_scale",current_scale_step)
 

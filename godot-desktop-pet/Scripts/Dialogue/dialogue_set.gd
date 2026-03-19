@@ -13,7 +13,7 @@ var button_load = load_json_test
 @export var dialogues : Array[DialogueResource]
 
 func load_json_test():
-	var dialogue_set_data = JsonOperations.load_json("DialogueSetTest.json", 
+	var dialogue_set_data = JsonOperations.load_json(
 			"res://Characters/Donqui/Resources/Dialogue/Intro/DialogueSetTest.json")
 	var dialogue_set : DialogueSet = DialogueSet.new()
 	dialogue_set.load_from_json(dialogue_set_data)
