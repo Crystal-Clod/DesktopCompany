@@ -14,6 +14,7 @@ static  func save_json(_json_data, _path : String):
 	if file:
 		var json_text = JSON.stringify(_json_data, "\t")
 		file.store_string(json_text)
+		EditorInterface.get_resource_filesystem().scan()
 		print("finished writing data")
 	else:
 		printerr("data writing failure")

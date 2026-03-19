@@ -47,12 +47,14 @@ func _process(_delta):
 	
 	if Input.is_action_just_released("click"):
 		if sprite_status == Status.Selected:
-			var dialogue_line_from_json = JsonOperations.load_json("DialogueLine.json", 
-			"res://Characters/Donqui/Resources/Dialogue/Intro/DialogueLine.json")
-			print(dialogue_line_from_json.line)
-			
-			DialogueManager._dialogue(dialogue_resource_test, 
+			var dialogue_data = JsonOperations.load_json("DialogueTest.json", 
+			"res://Characters/Donqui/Resources/Dialogue/Intro/DialogueTest.json")
+			var dialogue : DialogueResource = DialogueResource.new()
+			dialogue.load_from_json(dialogue_data)
+			DialogueManager._dialogue(dialogue, 
 			get_node("DialogueBoxPosition"))
+			#DialogueManager._dialogue(dialogue_resource_test, 
+			#get_node("DialogueBoxPosition"))
 		if sprite_status == Status.Dragging:
 			pet.emit_signal("dragging_state", false)
 			

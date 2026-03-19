@@ -1,0 +1,19 @@
+{
+	"DialogueLineArray": [
+		{
+			"idling_animation": "",
+			"line": "Salutations\n Executive Manager!",
+			"talking_animation": ""
+		},
+		{
+			"idling_animation": "",
+			"line": "Tis' just a little test, so during my next line I shall speak without moving mine mouth.",
+			"talking_animation": ""
+		},
+		{
+			"idling_animation": "",
+			"line": "Observe and marvel at my skills!\n...\nTis done!",
+			"talking_animation": "Idle"
+		}
+	]
+}

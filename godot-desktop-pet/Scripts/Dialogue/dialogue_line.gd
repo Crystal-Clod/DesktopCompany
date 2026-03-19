@@ -1,4 +1,5 @@
 @tool
+@icon("res://icon.svg")
 extends Resource
 class_name DialogueLine
 
@@ -10,12 +11,14 @@ class_name DialogueLine
 var button = _save_to_json
 
 func _save_to_json():
-	
+	JsonOperations.save_json(get_json_data(), self.resource_path)
+	#JsonOperations._save_json(DialogueLine)
+	pass
+
+func get_json_data():
 	var json_data : Dictionary = {
 		"line" : line,
 		"talking_animation" : talking_animation,
 		"idling_animation" : idling_animation
 	}
-	JsonOperations.save_json(json_data, self.resource_path)
-	#JsonOperations._save_json(DialogueLine)
-	pass
+	return json_data
