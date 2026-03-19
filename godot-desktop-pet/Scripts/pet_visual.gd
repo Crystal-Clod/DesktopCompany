@@ -47,10 +47,13 @@ func _process(_delta):
 	
 	if Input.is_action_just_released("click"):
 		if sprite_status == Status.Selected:
-			var dialogue_data = JsonOperations.load_json("DialogueTest.json", 
-			"res://Characters/Donqui/Resources/Dialogue/Intro/DialogueTest.json")
-			var dialogue : DialogueResource = DialogueResource.new()
-			dialogue.load_from_json(dialogue_data)
+			var dialogue_set_data = JsonOperations.load_json("DialogueSetTest.json", 
+			"res://Characters/Donqui/Resources/Dialogue/Intro/DialogueSetTest.json")
+			var dialogue_set : DialogueSet = DialogueSet.new()
+			dialogue_set.load_from_json(dialogue_set_data)
+			
+			
+			var dialogue : DialogueResource = dialogue_set.dialogues[randi_range(0,len(dialogue_set.dialogues) -1 )]
 			DialogueManager._dialogue(dialogue, 
 			get_node("DialogueBoxPosition"))
 			#DialogueManager._dialogue(dialogue_resource_test, 
@@ -88,10 +91,10 @@ func _process(_delta):
 		
 		
 	if Input.is_action_just_pressed("scroll_up"):
-		pet._decrease_scale()
+		pet._increase_scale()
 			
 	elif Input.is_action_just_pressed("scroll_down"):
-		pet._increase_scale()
+		pet._decrease_scale()
 
 func  _tween_scale():
 	var tween = get_tree().create_tween()

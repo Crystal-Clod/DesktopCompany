@@ -1,0 +1,33 @@
+{
+	"Rarity": 100.0,
+	"Dialogue": [
+		{
+			"DialogueLineArray": [
+				{
+					"line": "Salutations\nExecutive Manager!",
+					"talking_animation": "",
+					"idling_animation": ""
+				},
+				{
+					"line": "Tis' just another test.",
+					"talking_animation": "",
+					"idling_animation": ""
+				},
+				{
+					"line": "Hopefully it will end without fail!",
+					"talking_animation": "",
+					"idling_animation": ""
+				}
+			]
+		},
+		{
+			"DialogueLineArray": [
+				{
+					"line": "Tis' the shorter test.",
+					"talking_animation": "",
+					"idling_animation": ""
+				}
+			]
+		}
+	]
+}

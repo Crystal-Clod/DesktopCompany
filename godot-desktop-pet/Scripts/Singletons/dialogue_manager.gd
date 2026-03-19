@@ -31,7 +31,7 @@ func _start_dialogue(dialogue: DialogueResource, parent_node : Node2D):
 	if is_dialogue_active:
 		return
 	current_dialogue = dialogue
-	talking_starts.emit(current_dialogue.dialogue_text[current_line_index].talking_animation)
+	talking_starts.emit(current_dialogue.dialogue_lines[current_line_index].talking_animation)
 	
 	current_parent = parent_node
 	_show_text_box()
@@ -47,7 +47,7 @@ func  _show_text_box():
 	text_box.position = Vector2.ZERO
 	
 	text_box._display_text(
-		current_dialogue.dialogue_text[current_line_index])
+		current_dialogue.dialogue_lines[current_line_index])
 	can_advance_line = false
 	
 func _on_text_box_finish_displaying():
@@ -63,11 +63,11 @@ func  _continue_dialogue():
 		text_box.queue_free()
 		
 		current_line_index += 1
-		if current_line_index >= current_dialogue.dialogue_text.size():
+		if current_line_index >= current_dialogue.dialogue_lines.size():
 			is_dialogue_active = false
 			current_line_index = 0
 			finished_dialogue.emit()
 			return
 			
-		talking_starts.emit(current_dialogue.dialogue_text[current_line_index].talking_animation)
+		talking_starts.emit(current_dialogue.dialogue_lines[current_line_index].talking_animation)
 		_show_text_box()

@@ -12,7 +12,7 @@ static  func save_json(_json_data, _path : String):
 	var file = FileAccess.open(_path, FileAccess.ModeFlags.WRITE)
 	
 	if file:
-		var json_text = JSON.stringify(_json_data, "\t")
+		var json_text = JSON.stringify(_json_data, "\t", false)
 		file.store_string(json_text)
 		EditorInterface.get_resource_filesystem().scan()
 		print("finished writing data")
