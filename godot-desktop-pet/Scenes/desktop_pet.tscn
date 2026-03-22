@@ -3,21 +3,57 @@
 [ext_resource type="Script" uid="uid://560muyhjm74r" path="res://Scripts/TransparencyWindow.cs" id="1_58r7q"]
 [ext_resource type="Texture2D" uid="uid://1a80skx48fj1" path="res://Characters/Donqui/Sprites/Animations/Idle/Idle_1.png" id="2_2puce"]
 [ext_resource type="Script" uid="uid://c8cppnf3jxc4w" path="res://Scenes/pet.gd" id="2_s4m3q"]
+[ext_resource type="Script" uid="uid://bq5dudewatbu0" path="res://Scripts/Dialogue/dialogue_set.gd" id="3_euxxh"]
 [ext_resource type="Script" uid="uid://cshigjlwu0gq3" path="res://Scripts/pet_visual.gd" id="3_s4m3q"]
 [ext_resource type="Script" uid="uid://c3ljpo8a7yqrv" path="res://Scripts/animations.gd" id="4_nmtrc"]
+[ext_resource type="Script" uid="uid://boq7o6h65lalm" path="res://Scripts/Dialogue/dialogue_resource.gd" id="4_xbbij"]
 [ext_resource type="Script" uid="uid://cdwrljn85g2u6" path="res://Scripts/WindowsDll.cs" id="5_1a812"]
 [ext_resource type="Script" uid="uid://dbngoo47aks2" path="res://Scenes/pet_rigidbody.gd" id="5_2puce"]
+[ext_resource type="Script" uid="uid://b73nsvkrprv2l" path="res://Scripts/Dialogue/dialogue_line.gd" id="5_fa3vf"]
 [ext_resource type="Script" uid="uid://dlkbjfc12af5c" path="res://Scripts/resolution_fix.gd" id="6_dmnoo"]
 [ext_resource type="Resource" uid="uid://cy0pc1qyglcvr" path="res://Characters/Donqui/Resources/Dialogue/Intro/DialogueTest.tres" id="6_nmtrc"]
 [ext_resource type="Script" uid="uid://c4yaonskl7s6y" path="res://Scripts/popup_menu.gd" id="7_euxxh"]
 [ext_resource type="Script" uid="uid://bkm4g820x46mb" path="res://Scripts/screen_borders.gd" id="8_xbbij"]
 [ext_resource type="Script" uid="uid://df3ax1v8pympa" path="res://Scripts/HideFromTaskbar.cs" id="9_fa3vf"]
 
+[sub_resource type="Resource" id="Resource_j3t80"]
+script = ExtResource("5_fa3vf")
+line = "Salutations
+Executive Manager!"
+
+[sub_resource type="Resource" id="Resource_qy24d"]
+script = ExtResource("5_fa3vf")
+line = "Tis' just another test."
+
+[sub_resource type="Resource" id="Resource_65iai"]
+script = ExtResource("5_fa3vf")
+line = "Hopefully it will end without fail!"
+
+[sub_resource type="Resource" id="Resource_ixviq"]
+script = ExtResource("4_xbbij")
+dialogue_lines = Array[ExtResource("5_fa3vf")]([SubResource("Resource_j3t80"), SubResource("Resource_qy24d"), SubResource("Resource_65iai")])
+
+[sub_resource type="Resource" id="Resource_08ajf"]
+script = ExtResource("5_fa3vf")
+line = "Tis' the shorter test."
+
+[sub_resource type="Resource" id="Resource_ktutn"]
+script = ExtResource("4_xbbij")
+dialogue_lines = Array[ExtResource("5_fa3vf")]([SubResource("Resource_08ajf")])
+
+[sub_resource type="Resource" id="Resource_21h17"]
+script = ExtResource("3_euxxh")
+dialogues = Array[ExtResource("4_xbbij")]([SubResource("Resource_ixviq"), SubResource("Resource_ktutn")])
+
 [node name="DesktopPet" type="Node2D" unique_id=1682899498]
 script = ExtResource("1_58r7q")
 
 [node name="Pet" type="Node2D" parent="." unique_id=1462368491]
 script = ExtResource("2_s4m3q")
+character_name = "Donqui"
+dialogue_dictionary = {
+"Intro": Array[ExtResource("3_euxxh")]([SubResource("Resource_21h17")])
+}
 
 [node name="RigidBody2D" type="RigidBody2D" parent="Pet" unique_id=1687979387]
 position = Vector2(70, 256)
