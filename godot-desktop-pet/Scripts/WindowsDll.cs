@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-public partial class WindowsDll : Node2D
+public partial class WindowsDll : Node
 {
 	[DllImport("user32.dll")]
 	private static extern IntPtr GetForegroundWindow();

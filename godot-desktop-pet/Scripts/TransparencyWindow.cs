@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 
-public partial class TransparencyWindow : Node2D
+public partial class TransparencyWindow : Node
 {
 	[DllImport("user32.dll")]
 	private static extern IntPtr GetActiveWindow();

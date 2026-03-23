@@ -12,12 +12,15 @@ config_version=5
 
 config/name="GodotDesktopPet"
 run/main_scene="uid://dkyvq7llkhfjl"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Desktop Company"
 config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 DialogueManager="*uid://bwiga4eh7ppx8"
+GameManager="*uid://25fk0bkv6wc7"
 
 [display]
 

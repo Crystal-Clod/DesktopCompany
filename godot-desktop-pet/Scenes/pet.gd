@@ -16,6 +16,7 @@ var button = refresh_dictionary
 @export var dialogue_dictionary : Dictionary
 
 func _init() -> void:
+	print(OS.get_data_dir())
 	#name = character_name
 	#print(FileOperations.get_all_sub_directories("res://Characters/Donqui/Resources/Dialogue/"))
 	refresh_dictionary()

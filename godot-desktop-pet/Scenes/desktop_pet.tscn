@@ -45,8 +45,7 @@ dialogue_lines = Array[ExtResource("5_fa3vf")]([SubResource("Resource_08ajf")])
 script = ExtResource("3_euxxh")
 dialogues = Array[ExtResource("4_xbbij")]([SubResource("Resource_ixviq"), SubResource("Resource_ktutn")])
 
-[node name="DesktopPet" type="Node2D" unique_id=1682899498]
-script = ExtResource("1_58r7q")
+[node name="DesktopPet" type="Node" unique_id=149384556]
 
 [node name="Pet" type="Node2D" parent="." unique_id=1462368491]
 script = ExtResource("2_s4m3q")
@@ -79,9 +78,12 @@ current_animation = "Yap"
 [node name="DialogueBoxPosition" type="Node2D" parent="Pet/RigidBody2D/Visuals" unique_id=1068813606]
 position = Vector2(75, 0)
 
-[node name="NotPlayerStuff" type="Node2D" parent="." unique_id=964059842]
+[node name="NotPlayerStuff" type="Node" parent="." unique_id=2105742958]
 
-[node name="WindowsDLL" type="Node2D" parent="NotPlayerStuff" unique_id=2129481452]
+[node name="TransparencyWindow" type="Node" parent="NotPlayerStuff" unique_id=1269539307]
+script = ExtResource("1_58r7q")
+
+[node name="WindowsDLL" type="Node" parent="NotPlayerStuff" unique_id=303487825]
 script = ExtResource("5_1a812")
 
 [node name="ResolutionFix" type="Node2D" parent="NotPlayerStuff" unique_id=19668798]
@@ -105,6 +107,8 @@ script = ExtResource("8_xbbij")
 
 [node name="HideFromTaskbar" type="Node2D" parent="NotPlayerStuff" unique_id=1835959338]
 script = ExtResource("9_fa3vf")
+
+[node name="ModFolder" type="Node" parent="NotPlayerStuff" unique_id=1318682330]
 
 [connection signal="change_scale" from="Pet" to="Pet/RigidBody2D/Visuals" method="_on_pet_change_scale"]
 [connection signal="dragging_state" from="Pet" to="Pet/RigidBody2D" method="_on_pet_dragging_state"]
