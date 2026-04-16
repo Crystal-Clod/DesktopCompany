@@ -32,7 +32,24 @@ var current_scale_step : Vector2 = Vector2(1.0,1.0)
 var current_animation : AnimationData
 
 #var dialogue_set : DialogueSet
-
+func _init() -> void:
+	Events.resolution_set.connect(
+		func():
+			var max_iterations: int = 5
+			var current_iteration: int = 0
+			while get_viewport_rect().size.x/(texture.get_size().x*scale.x) > 5:
+				if(current_iteration >= max_iterations):
+					return
+				current_iteration += 1
+				pet._increase_scale()
+				
+				
+				
+				
+			print(get_viewport_rect().size.x/texture.get_size().x)
+			print("%s and %s",get_viewport_rect().size, texture.get_size())
+			)
+			
 func  _ready():
 	#var dialogue_set_data = JsonOperations.load_json(
 			#"res://Characters/Donqui/Resources/Dialogue/Intro/DialogueSetTest.json")

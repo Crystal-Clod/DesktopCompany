@@ -54,6 +54,7 @@ func refresh_dictionary():
 	
 func _ready() -> void:
 	emit_signal("change_scale",current_scale_step)
+	#global_position = get_viewport_rect().get_center()
 
 func _increase_scale():
 	if(current_scale_step.x < 4):
@@ -64,3 +65,4 @@ func _decrease_scale():
 	if(current_scale_step.x > 0.25):
 		current_scale_step = current_scale_step/step_size
 		emit_signal("change_scale",current_scale_step)
+	

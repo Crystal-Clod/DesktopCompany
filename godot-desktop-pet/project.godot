@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 
 DialogueManager="*uid://bwiga4eh7ppx8"
 GameManager="*uid://25fk0bkv6wc7"
+Events="*uid://j5ec0spteeyj"
 
 [display]
 

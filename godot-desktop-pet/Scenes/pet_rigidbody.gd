@@ -12,6 +12,10 @@ var clear_button = _clear_polygons
 
 var dragging_mouse_position : Vector2
 
+func _init() -> void:
+	Events.resolution_set.connect(func(): position = get_viewport_rect().get_center())
+	pass
+
 func _ready() -> void:
 	#UNCOMMENT THIS TO SEE COLLISIONS
 	#get_tree().debug_collisions_hint = true
