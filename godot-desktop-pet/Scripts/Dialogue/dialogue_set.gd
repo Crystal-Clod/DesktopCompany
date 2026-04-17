@@ -37,6 +37,9 @@ func load_from_json(json_data : Dictionary):
 func _save_to_json():
 	JsonOperations.save_json(get_json_data(), self.resource_path)
 
+func save_to_json(path : String):
+	JsonOperations.save_json(get_json_data(), path)
+
 func get_json_data():
 	var json_data : Dictionary = {
 		"Rarity" : rarity,

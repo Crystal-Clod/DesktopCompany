@@ -17,7 +17,9 @@ var button = refresh_dictionary
 @export var dialogue_dictionary : Dictionary
 
 func _init() -> void:
-	print(OS.get_data_dir())
+	
+	
+	#print(OS.get_data_dir())
 	#name = character_name
 	#print(FileOperations.get_all_sub_directories("res://Characters/Donqui/Resources/Dialogue/"))
 	refresh_dictionary()
@@ -37,7 +39,7 @@ func refresh_dictionary():
 	for directory in directories:
 		var files_in_directory = FileOperations.get_all_files_of_type_from_directory(directory,"json")
 		if len(files_in_directory) > 0:
-			print("2) "+str(files_in_directory))
+			#print("2) "+str(files_in_directory))
 			files.append_array(files_in_directory)
 		
 		
@@ -53,6 +55,7 @@ func refresh_dictionary():
 	dialogue_dictionary.get_or_add("Intro",resources)
 	
 func _ready() -> void:
+	GameManager._character_folder_setup(character_name)
 	pass
 	#emit_signal("change_scale",current_scale_step)
 	#global_position = get_viewport_rect().get_center()

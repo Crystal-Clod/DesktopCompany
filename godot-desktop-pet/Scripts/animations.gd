@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 var rng = RandomNumberGenerator.new()
 signal play_animation (animation_data:AnimationData)
 

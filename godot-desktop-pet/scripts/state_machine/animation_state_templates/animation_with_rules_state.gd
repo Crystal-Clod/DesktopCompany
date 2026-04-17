@@ -5,7 +5,7 @@ extends AnimationBaseState
 
 func enter() -> void:
 	super.enter()
-	rule.init()
+	rule.init(self)
 
 func run(_delta: float) -> void:
 	if(rule.rule_check_passed()):

@@ -1,6 +1,6 @@
 class_name JsonOperations
 
-static  func save_json(_json_data, _path : String):
+static  func save_json(_json_data : String, _path : String):
 	_path = _path.trim_suffix(_path.get_extension())
 	_path = _path + "json"
 	

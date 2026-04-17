@@ -1,7 +1,7 @@
 class_name StateRule
 extends Resource
 
-func init() -> void:
+func init(animation_state: AnimationState = null) -> void:
 	pass
 
 func execute():

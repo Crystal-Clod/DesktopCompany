@@ -162,3 +162,7 @@ func _on_pet_change_scale(current_scale: Vector2) -> void:
 func _on_base_pet_set_scale_instantly(scale_relative_to_initial_scale: Vector2) -> void:
 	current_scale_step = scale_relative_to_initial_scale
 	scale = scale_relative_to_initial_scale
+
+
+func _on_animation_data_play_animation(animation_data: AnimationData) -> void:
+	pass # Replace with function body.
