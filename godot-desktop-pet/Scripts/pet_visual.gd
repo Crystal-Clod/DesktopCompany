@@ -33,21 +33,22 @@ var current_animation : AnimationData
 
 #var dialogue_set : DialogueSet
 func _init() -> void:
+	Events.pointer_changed_screens.connect(
+		func():
+			if sprite_status == Status.Dragging:
+				DisplayServer.window_set_current_screen(DisplayServer.SCREEN_WITH_MOUSE_FOCUS)
+				Events.game_changed_screens.emit()
+	)
 	Events.resolution_set.connect(
 		func():
 			var max_iterations: int = 5
 			var current_iteration: int = 0
-			while get_viewport_rect().size.x/(texture.get_size().x*scale.x) > 5:
+			while get_viewport_rect().size.x/(texture.get_size().x*current_iteration) > 10:
 				if(current_iteration >= max_iterations):
 					return
 				current_iteration += 1
-				pet._increase_scale()
 				
-				
-				
-				
-			print(get_viewport_rect().size.x/texture.get_size().x)
-			print("%s and %s",get_viewport_rect().size, texture.get_size())
+			pet._set_scale_instantly(Vector2.ONE * current_iteration)
 			)
 			
 func  _ready():
@@ -112,6 +113,9 @@ func _process(_delta):
 			
 	elif Input.is_action_just_pressed("scroll_down"):
 		pet._decrease_scale()
+		
+	if Input.is_action_just_released("quit"):
+		get_tree().quit()
 
 func  _tween_scale():
 	var tween = get_tree().create_tween()
@@ -153,3 +157,8 @@ func _on_animations_play_animation(animation_data):
 func _on_pet_change_scale(current_scale: Vector2) -> void:
 	current_scale_step = current_scale
 	_tween_scale()
+
+
+func _on_base_pet_set_scale_instantly(scale_relative_to_initial_scale: Vector2) -> void:
+	current_scale_step = scale_relative_to_initial_scale
+	scale = scale_relative_to_initial_scale

@@ -1,0 +1,18 @@
+class_name AnimationEndRule
+extends StateRule
+var timer_ended: bool = false
+var animation_frame_count = 1
+var timer: SceneTreeTimer
+
+func init() -> void:
+	timer = Engine.get_main_loop().create_timer(
+		animation_frame_count/6.0)
+		
+	timer_ended = false
+	
+	await timer.timeout
+	
+	timer_ended = true
+
+func rule_check_passed() -> bool:
+	return timer_ended

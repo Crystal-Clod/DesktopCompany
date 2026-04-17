@@ -4,6 +4,7 @@ extends Node2D
 class_name Pet
 
 signal change_scale(current_scale: Vector2)
+signal set_scale_instantly(scale_relative_to_initial_scale : Vector2)
 @warning_ignore("unused_signal")
 signal dragging_state(is_dragging : bool)
 
@@ -46,14 +47,14 @@ func refresh_dictionary():
 		
 		var dialogue_set : DialogueSet = DialogueSet.new()
 		dialogue_set.load_from_json(json)
-		print(dialogue_set)
 		resources.append(dialogue_set)
 	pass
 	
 	dialogue_dictionary.get_or_add("Intro",resources)
 	
 func _ready() -> void:
-	emit_signal("change_scale",current_scale_step)
+	pass
+	#emit_signal("change_scale",current_scale_step)
 	#global_position = get_viewport_rect().get_center()
 
 func _increase_scale():
@@ -65,4 +66,18 @@ func _decrease_scale():
 	if(current_scale_step.x > 0.25):
 		current_scale_step = current_scale_step/step_size
 		emit_signal("change_scale",current_scale_step)
+
+func _set_scale_instantly(scale_relative_to_initial_scale : Vector2):
 	
+	if scale_relative_to_initial_scale.x > 0:
+		if current_scale_step.x > 4:
+			current_scale_step = Vector2.ONE * 4
+		else:
+			current_scale_step = Vector2.ONE * (step_size * scale_relative_to_initial_scale)
+	else:
+		if current_scale_step.x < 0.25:
+			current_scale_step = Vector2.ONE * 0.25
+		else:
+			current_scale_step = Vector2.ONE/(step_size*scale_relative_to_initial_scale)
+	
+	emit_signal("set_scale_instantly", current_scale_step)

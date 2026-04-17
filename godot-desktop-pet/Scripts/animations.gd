@@ -9,10 +9,15 @@ signal play_animation (animation_data:AnimationData)
 
 @export var all_animations: Dictionary[String,AnimationDataCollection]
 
+@onready var animation_state_machine: AnimationStateMachine = %AnimationStateMachine
+
+
 var can_blink = true
 var blink_is_running = false
 
 func _ready():
+	animation_state_machine.init()
+	
 	DialogueManager.finished_dialogue.connect(_finished_dialogue)
 	DialogueManager.finished_displaying.connect(_finished_dialogue)
 	
@@ -67,7 +72,6 @@ func _load_json(json_name : String):
 	var json_path = "res://Characters/" + current_character + "/Sprites/Animations/"+ current_animation+ "/" + json_name
 	var data_file = FileAccess.open(json_path, FileAccess.READ)
 	var parsed_result = JSON.parse_string(data_file.get_as_text())
-	print(parsed_result.rarity)
 
 func _blink():
 	blink_is_running = true
@@ -75,11 +79,16 @@ func _blink():
 		blink_is_running = false
 		return
 	play_animation.emit(_get_animation_data_collection("Idle",0))
+	
+	#animation_state_machine.play_animation("Idle")
+	
 	await  get_tree().create_timer(rng.randf_range(0.5,3)).timeout
 	if(!can_blink):
 		blink_is_running = false
 		return
 	play_animation.emit(_get_animation_data_collection("Blink",0))
+	
+	#animation_state_machine.play_animation("Blink")
 	await  get_tree().create_timer(_get_animation_data_collection("Blink",0).frame_amount/6.0).timeout
 	
 	_blink()
@@ -105,6 +114,7 @@ func  _finished_dialogue():
 func _start_talking(animation_name : String):
 	if animation_name == "":
 		animation_name = "Yap"
-		
+	
+	animation_state_machine.play_animation("Yap")
 	play_animation.emit(all_animations.get(animation_name).animation_data_collection[0])
 	can_blink = false

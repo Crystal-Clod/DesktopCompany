@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="TimerRule" format=3 uid="uid://c6ir2haeyxxqp"]
+
+[ext_resource type="Script" uid="uid://bt17n1io8oqgi" path="res://resources/state_rules/timer_rule.gd" id="1_eiv7c"]
+
+[resource]
+script = ExtResource("1_eiv7c")
+metadata/_custom_type_script = "uid://bt17n1io8oqgi"

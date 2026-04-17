@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dlkbjfc12af5c" path="res://scripts/resolution_fix.gd" id="6_dmnoo"]
 [ext_resource type="Script" uid="uid://c4yaonskl7s6y" path="res://scripts/popup_menu.gd" id="7_euxxh"]
 [ext_resource type="Script" uid="uid://bkm4g820x46mb" path="res://scripts/screen_borders.gd" id="8_xbbij"]
+[ext_resource type="Script" uid="uid://pfh8glbota1p" path="res://Scenes/multi_monitor.gd" id="9_58r7q"]
 [ext_resource type="Script" uid="uid://df3ax1v8pympa" path="res://scripts/HideFromTaskbar.cs" id="9_fa3vf"]
 
 [node name="DesktopPet" type="Node" unique_id=149384556]
@@ -44,5 +45,8 @@ script = ExtResource("8_xbbij")
 script = ExtResource("9_fa3vf")
 
 [node name="ModFolder" type="Node" parent="NotPlayerStuff" unique_id=1318682330]
+
+[node name="MultiMonitor" type="Node" parent="NotPlayerStuff" unique_id=1071849187]
+script = ExtResource("9_58r7q")
 
 [connection signal="index_pressed" from="NotPlayerStuff/StatusIndicator/PopupMenu" to="NotPlayerStuff/StatusIndicator/PopupMenu" method="_on_index_pressed"]

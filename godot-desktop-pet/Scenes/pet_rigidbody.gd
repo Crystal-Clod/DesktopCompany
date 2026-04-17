@@ -5,6 +5,8 @@ extends RigidBody2D
 
 @export var snap_distance : float = 1
 
+@export var enable_physics : bool = false
+
 @export_tool_button("Generate Polygon")
 var button = _sprite_to_polygon
 @export_tool_button("Clear All Polygons")
@@ -13,10 +15,11 @@ var clear_button = _clear_polygons
 var dragging_mouse_position : Vector2
 
 func _init() -> void:
-	Events.resolution_set.connect(func(): position = get_viewport_rect().get_center())
+	#maybe move event to here later
 	pass
 
 func _ready() -> void:
+	Events.resolution_set.connect(func(): position = get_viewport_rect().get_center())
 	#UNCOMMENT THIS TO SEE COLLISIONS
 	#get_tree().debug_collisions_hint = true
 
@@ -83,7 +86,9 @@ func _clean_polygon(points : PackedVector2Array) -> PackedVector2Array:
 
 
 func _on_pet_dragging_state(is_dragging: bool) -> void:
-	return
+	if !enable_physics:
+		return
+		
 	freeze = is_dragging
 	
 	if !freeze:

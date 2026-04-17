@@ -15,5 +15,3 @@ func _init() -> void:
 		DirAccess.make_dir_absolute(character_folder)
 		
 	
-	
-	

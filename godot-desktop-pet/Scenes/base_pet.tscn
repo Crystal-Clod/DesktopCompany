@@ -9,6 +9,11 @@
 [ext_resource type="Script" uid="uid://cshigjlwu0gq3" path="res://scripts/pet_visual.gd" id="7_sr8t1"]
 [ext_resource type="Resource" uid="uid://cy0pc1qyglcvr" path="res://Characters/Donqui/Resources/Dialogue/Intro/DialogueTest.tres" id="8_y5nxr"]
 [ext_resource type="Script" uid="uid://c3ljpo8a7yqrv" path="res://scripts/animations.gd" id="9_y21ce"]
+[ext_resource type="Script" uid="uid://cp546aqicfayl" path="res://scripts/state_machine/animation_state_machine.gd" id="10_3g4af"]
+[ext_resource type="Script" uid="uid://bi8p4nlwsoe5p" path="res://scripts/state_machine/animation_state_templates/animation_with_rules_state.gd" id="11_j0ffh"]
+[ext_resource type="Script" uid="uid://dpleuo0mocixr" path="res://scripts/state_machine/animation_state_templates/animation_base_state.gd" id="11_ocmii"]
+[ext_resource type="Resource" uid="uid://c6ir2haeyxxqp" path="res://resources/state_rules/timer_rule.tres" id="12_6uj7u"]
+[ext_resource type="Resource" uid="uid://oskxnltuckqf" path="res://resources/state_rules/animation_end_rule.tres" id="13_xjgar"]
 
 [sub_resource type="Resource" id="Resource_j3t80"]
 script = ExtResource("4_j0ffh")
@@ -52,6 +57,7 @@ lock_rotation = true
 freeze = true
 script = ExtResource("5_6uj7u")
 snap_distance = 0.0
+enable_physics = true
 
 [node name="Visuals" type="Sprite2D" parent="RigidBody2D" unique_id=2057904400 node_paths=PackedStringArray("rigid_body_2d", "pet")]
 texture_filter = 1
@@ -67,10 +73,32 @@ script = ExtResource("9_y21ce")
 current_character = "Donqui"
 current_animation = "Yap"
 
+[node name="AnimationStateMachine" type="Node" parent="RigidBody2D/Visuals/Animations" unique_id=56706689 node_paths=PackedStringArray("initial_state")]
+unique_name_in_owner = true
+script = ExtResource("10_3g4af")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="RigidBody2D/Visuals/Animations/AnimationStateMachine" unique_id=1324600679 node_paths=PackedStringArray("other_state")]
+script = ExtResource("11_j0ffh")
+rule = ExtResource("12_6uj7u")
+other_state = NodePath("../Blink")
+state_name = "Idle"
+
+[node name="Blink" type="Node" parent="RigidBody2D/Visuals/Animations/AnimationStateMachine" unique_id=231732148 node_paths=PackedStringArray("other_state")]
+script = ExtResource("11_j0ffh")
+rule = ExtResource("13_xjgar")
+other_state = NodePath("../Idle")
+state_name = "Blink"
+
+[node name="Yap" type="Node" parent="RigidBody2D/Visuals/Animations/AnimationStateMachine" unique_id=2089479611]
+script = ExtResource("11_ocmii")
+state_name = "Yap"
+
 [node name="DialogueBoxPosition" type="Node2D" parent="RigidBody2D/Visuals" unique_id=1383435906]
 position = Vector2(75, 0)
 
 [connection signal="change_scale" from="." to="RigidBody2D/Visuals" method="_on_pet_change_scale"]
 [connection signal="dragging_state" from="." to="RigidBody2D" method="_on_pet_dragging_state"]
+[connection signal="set_scale_instantly" from="." to="RigidBody2D/Visuals" method="_on_base_pet_set_scale_instantly"]
 [connection signal="pet_right_clicked" from="RigidBody2D/Visuals" to="RigidBody2D/Visuals/Animations" method="_on_visuals_pet_right_clicked"]
 [connection signal="play_animation" from="RigidBody2D/Visuals/Animations" to="RigidBody2D/Visuals" method="_on_animations_play_animation"]

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="AnimationEndRule" format=3 uid="uid://oskxnltuckqf"]
+
+[ext_resource type="Script" uid="uid://coef0ue3mi4b8" path="res://resources/state_rules/animation_end_rule.gd" id="1_6vdpg"]
+
+[resource]
+script = ExtResource("1_6vdpg")
+metadata/_custom_type_script = "uid://coef0ue3mi4b8"
