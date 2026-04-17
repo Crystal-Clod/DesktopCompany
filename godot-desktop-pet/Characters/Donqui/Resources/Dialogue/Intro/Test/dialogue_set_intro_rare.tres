@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="DialogueSet" format=3 uid="uid://7pxmqyil5b8a"]
+
+[ext_resource type="Script" uid="uid://boq7o6h65lalm" path="res://scripts/dialogue/dialogue_resource.gd" id="1_y8xl3"]
+[ext_resource type="Script" uid="uid://b73nsvkrprv2l" path="res://scripts/dialogue/dialogue_line.gd" id="2_g78hx"]
+[ext_resource type="Script" uid="uid://bq5dudewatbu0" path="res://scripts/dialogue/dialogue_set.gd" id="3_53mew"]
+
+[sub_resource type="Resource" id="Resource_08ajf"]
+script = ExtResource("2_g78hx")
+line = "BITCH"
+
+[sub_resource type="Resource" id="Resource_ktutn"]
+script = ExtResource("1_y8xl3")
+dialogue_lines = Array[ExtResource("2_g78hx")]([SubResource("Resource_08ajf")])
+
+[resource]
+script = ExtResource("3_53mew")
+rarity = 90.0
+dialogues = Array[ExtResource("1_y8xl3")]([SubResource("Resource_ktutn")])

@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="DialogueSet" format=3 uid="uid://b4syjw8e26jrc"]
+
+[ext_resource type="Script" uid="uid://boq7o6h65lalm" path="res://scripts/dialogue/dialogue_resource.gd" id="1_1xlom"]
+[ext_resource type="Script" uid="uid://b73nsvkrprv2l" path="res://scripts/dialogue/dialogue_line.gd" id="2_t078y"]
+[ext_resource type="Script" uid="uid://bq5dudewatbu0" path="res://scripts/dialogue/dialogue_set.gd" id="3_ko5a5"]
+
+[sub_resource type="Resource" id="Resource_j3t80"]
+script = ExtResource("2_t078y")
+line = "Salutations
+Executive Manager!"
+
+[sub_resource type="Resource" id="Resource_qy24d"]
+script = ExtResource("2_t078y")
+line = "Tis' just another test."
+
+[sub_resource type="Resource" id="Resource_65iai"]
+script = ExtResource("2_t078y")
+line = "Hopefully it will end without fail!"
+
+[sub_resource type="Resource" id="Resource_ixviq"]
+script = ExtResource("1_1xlom")
+dialogue_lines = Array[ExtResource("2_t078y")]([SubResource("Resource_j3t80"), SubResource("Resource_qy24d"), SubResource("Resource_65iai")])
+
+[sub_resource type="Resource" id="Resource_08ajf"]
+script = ExtResource("2_t078y")
+line = "Tis' the shorter test."
+
+[sub_resource type="Resource" id="Resource_ktutn"]
+script = ExtResource("1_1xlom")
+dialogue_lines = Array[ExtResource("2_t078y")]([SubResource("Resource_08ajf")])
+
+[resource]
+script = ExtResource("3_ko5a5")
+dialogues = Array[ExtResource("1_1xlom")]([SubResource("Resource_ixviq"), SubResource("Resource_ktutn")])

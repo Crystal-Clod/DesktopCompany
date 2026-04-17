@@ -1,8 +1,8 @@
 class_name JsonOperations
 
-static  func save_json(_json_data : String, _path : String):
+static  func save_json(_json_data : Dictionary, _path : String):
 	_path = _path.trim_suffix(_path.get_extension())
-	_path = _path + "json"
+	_path = _path + ".json"
 	
 	if FileAccess.file_exists(_path):
 		print("overwriting...")
@@ -14,7 +14,7 @@ static  func save_json(_json_data : String, _path : String):
 	if file:
 		var json_text = JSON.stringify(_json_data, "\t", false)
 		file.store_string(json_text)
-		EditorInterface.get_resource_filesystem().scan()
+		#EditorInterface.get_resource_filesystem().scan()
 		print("finished writing data")
 	else:
 		printerr("data writing failure")

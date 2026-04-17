@@ -55,6 +55,6 @@ func _dialogue_setup(dialogue : Dictionary):
 		var value = dialogue[key]
 		print(value)
 		for dialogue_set : DialogueSet in value:
-			dialogue_set.save_to_json(dialogue_folder + "Idle_" + str(set_number))
+			dialogue_set.save_to_json(dialogue_folder + "/Idle_" + str(set_number))
 			set_number += 1
 	
