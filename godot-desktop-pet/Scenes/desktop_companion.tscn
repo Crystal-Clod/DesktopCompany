@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dkyvq7llkhfjl"]
+
+[ext_resource type="PackedScene" uid="uid://b06qqkxhudf00" path="res://Scenes/base_character.tscn" id="1_h2swe"]
+[ext_resource type="Script" uid="uid://560muyhjm74r" path="res://scripts/TransparencyWindow.cs" id="2_hppq7"]
+[ext_resource type="Script" uid="uid://cdwrljn85g2u6" path="res://scripts/WindowsDll.cs" id="3_krbfc"]
+[ext_resource type="Script" uid="uid://dlkbjfc12af5c" path="res://scripts/resolution_fix.gd" id="4_f1fbg"]
+[ext_resource type="Texture2D" uid="uid://1a80skx48fj1" path="res://Characters/Donqui/Sprites/Animations/Idle/Idle_1.png" id="5_p4keq"]
+[ext_resource type="Script" uid="uid://c4yaonskl7s6y" path="res://scripts/popup_menu.gd" id="6_tjryr"]
+[ext_resource type="Script" uid="uid://bkm4g820x46mb" path="res://scripts/screen_borders.gd" id="7_pqliy"]
+[ext_resource type="Script" uid="uid://df3ax1v8pympa" path="res://scripts/HideFromTaskbar.cs" id="8_8b5ee"]
+[ext_resource type="Script" uid="uid://5k63r8g5mjbw" path="res://scripts/mod_folder.gd" id="9_8oi6f"]
+[ext_resource type="Script" uid="uid://pfh8glbota1p" path="res://scripts/multi_monitor.gd" id="10_tye7p"]
+
+[node name="DesktopPet" type="Node" unique_id=149384556]
+
+[node name="BasePet" parent="." unique_id=189861490 instance=ExtResource("1_h2swe")]
+
+[node name="NotPlayerStuff" type="Node" parent="." unique_id=2105742958]
+
+[node name="TransparencyWindow" type="Node" parent="NotPlayerStuff" unique_id=1269539307]
+script = ExtResource("2_hppq7")
+
+[node name="WindowsDLL" type="Node" parent="NotPlayerStuff" unique_id=303487825]
+script = ExtResource("3_krbfc")
+
+[node name="ResolutionFix" type="Node2D" parent="NotPlayerStuff" unique_id=19668798]
+script = ExtResource("4_f1fbg")
+
+[node name="StatusIndicator" type="StatusIndicator" parent="NotPlayerStuff" unique_id=140505757]
+icon = ExtResource("5_p4keq")
+menu = NodePath("PopupMenu")
+
+[node name="PopupMenu" type="PopupMenu" parent="NotPlayerStuff/StatusIndicator" unique_id=77807322]
+oversampling_override = 1.0
+mode = 1
+title = "Options"
+item_count = 1
+item_0/text = "Quit"
+item_0/id = 0
+script = ExtResource("6_tjryr")
+
+[node name="ScreenBorders" type="StaticBody2D" parent="NotPlayerStuff" unique_id=934954857]
+script = ExtResource("7_pqliy")
+
+[node name="HideFromTaskbar" type="Node2D" parent="NotPlayerStuff" unique_id=1835959338]
+script = ExtResource("8_8b5ee")
+
+[node name="ModFolder" type="Node" parent="NotPlayerStuff" unique_id=1318682330]
+script = ExtResource("9_8oi6f")
+
+[node name="MultiMonitor" type="Node" parent="NotPlayerStuff" unique_id=1071849187]
+script = ExtResource("10_tye7p")
+
+[connection signal="index_pressed" from="NotPlayerStuff/StatusIndicator/PopupMenu" to="NotPlayerStuff/StatusIndicator/PopupMenu" method="_on_index_pressed"]

@@ -24,7 +24,7 @@ func _ready():
 	DialogueManager.talking_starts.connect(_start_talking)
 	
 	var animation_directories = ResourceLoader.list_directory("res://Characters/" + current_character + "/Sprites/Animations/")
-	print(animation_directories)
+	#print(animation_directories)
 	for animation in animation_directories:
 		animation = animation.trim_suffix("/")
 		_load_all_animations_from_path(animation)
@@ -52,7 +52,7 @@ func _load_animation(animation_name : String, animation_type : String) -> Animat
 func _load_all_animations_from_path(animation : String):
 	var temp_path = "res://Characters/" + current_character + "/Sprites/Animations/"+ animation
 	var files_in_directory = ResourceLoader.list_directory(temp_path)
-	print(files_in_directory)
+	#print(files_in_directory)
 	for file in files_in_directory:
 		if(file.ends_with(".json")):
 			_load_json(file)

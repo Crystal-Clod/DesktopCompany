@@ -1,71 +1,70 @@
-@tool
 extends Node2D
 
-class_name Pet
+class_name Character
 
 signal change_scale(current_scale: Vector2)
 signal set_scale_instantly(scale_relative_to_initial_scale : Vector2)
 @warning_ignore("unused_signal")
 signal dragging_state(is_dragging : bool)
 
+@onready var dialogue_data: DialogueData = %DialogueData
+
+
 @export_custom(PROPERTY_HINT_LINK,"") var current_scale_step : Vector2 = Vector2(1.0,1.0)
 @export var step_size : float = 2
 
 @export var character_name : String
-@export_tool_button("Test Dictionary")
-var button = refresh_dictionary
-@export var dialogue_dictionary : Dictionary
+
 
 func _init() -> void:
-	
-	
 	#print(OS.get_data_dir())
 	#name = character_name
 	#print(FileOperations.get_all_sub_directories("res://Characters/Donqui/Resources/Dialogue/"))
-	refresh_dictionary()
+	#refresh_dictionary()
 	pass
 
-func get_random_dialogue_from_set(_set_name : String):
-	var dialogue_sets : Array[DialogueSet] = dialogue_dictionary.get("Intro")
-	var dialogue_set = dialogue_sets[randi_range(0,len(dialogue_sets) -1)] 
+func get_random_dialogue_from_rarity_set(_set_name : String):
+	var dialogue_sets : DialogueSetArray = dialogue_data.dialogue_dictionary.get("Intro")
+	if dialogue_sets == null:
+		push_error("EMPTY DIALOGUE SET - RARITY")
+	
+	var rarity_roll = randf_range(0,100)
+	var rolled_sets : Array[DialogueSet]
+	
+	for d_set in dialogue_sets.dialogue_array:
+		if d_set.rarity >= rarity_roll:
+			rolled_sets.append(d_set)
+	if len(rolled_sets) == 0:
+		return get_random_dialogue_from_set(_set_name)
+		
+	
+	var dialogue_set = rolled_sets[randi_range(0,len(rolled_sets) -1)] 
 	var dialogue = dialogue_set.dialogues[randi_range(0,len(dialogue_set.dialogues) -1)]
 	return dialogue 
 
-func refresh_dictionary():
-	#var files = FileOperations.get_all_files_of_type_from_directory("res://Characters/Donqui/Resources/Dialogue/Intro/","json")
-	#print("1) "+str(files))
-	var files : Array[String]
-	var directories = FileOperations.get_all_sub_directories("res://Characters/Donqui/Resources/Dialogue/")
-	for directory in directories:
-		var files_in_directory = FileOperations.get_all_files_of_type_from_directory(directory,"json")
-		if len(files_in_directory) > 0:
-			#print("2) "+str(files_in_directory))
-			files.append_array(files_in_directory)
-		
-		
-	var resources : Array[DialogueSet]
-	for file in files:
-		var json = JsonOperations.load_json(file)
-		
-		var dialogue_set : DialogueSet = DialogueSet.new()
-		dialogue_set.load_from_json(json)
-		resources.append(dialogue_set)
-	pass
+func get_random_dialogue_from_set(_set_name : String):
+	var dialogue_sets : DialogueSetArray = dialogue_data.dialogue_dictionary.get("Intro")
 	
-	dialogue_dictionary.get_or_add("Intro",resources)
+	if dialogue_sets == null:
+		push_error("EMPTY DIALOGUE SET - RANDOM")
 	
+	var dialogue_set = dialogue_sets.dialogue_array[randi_range(0,len(dialogue_sets.dialogue_array) -1)] 
+	var dialogue = dialogue_set.dialogues[randi_range(0,len(dialogue_set.dialogues) -1)]
+	return dialogue 
+
+
 func _ready() -> void:
 	GameManager._character_folder_setup(character_name)
 	pass
 	#emit_signal("change_scale",current_scale_step)
 	#global_position = get_viewport_rect().get_center()
 
-func _increase_scale():
+func increase_scale():
 	if(current_scale_step.x < 4):
 		current_scale_step = current_scale_step*step_size
 		emit_signal("change_scale",current_scale_step)
 			
-func _decrease_scale():
+func decrease_scale():
 	if(current_scale_step.x > 0.25):
 		current_scale_step = current_scale_step/step_size
 		emit_signal("change_scale",current_scale_step)

@@ -1,13 +1,11 @@
 extends Sprite2D
 @export var rigid_body_2d: RigidBody2D
-@export var pet: Pet
+@export var character : Character
 
 @export var dialogue_resource_test : DialogueResource
 
-signal pet_clicked
-signal pet_right_clicked
-
-var rng = RandomNumberGenerator.new()
+signal character_clicked
+signal character_right_clicked
 
 const SPEED:int = 50
 
@@ -30,8 +28,6 @@ var sprite_status : Status
 
 var current_scale_step : Vector2 = Vector2(1.0,1.0)
 var current_animation : AnimationData
-
-#var dialogue_set : DialogueSet
 func _init() -> void:
 	Events.pointer_changed_screens.connect(
 		func():
@@ -48,14 +44,10 @@ func _init() -> void:
 					return
 				current_iteration += 1
 				
-			pet._set_scale_instantly(Vector2.ONE * current_iteration)
+			character._set_scale_instantly(Vector2.ONE * current_iteration)
 			)
 			
 func  _ready():
-	#var dialogue_set_data = JsonOperations.load_json(
-			#"res://Characters/Donqui/Resources/Dialogue/Intro/DialogueSetTest.json")
-	#dialogue_set = DialogueSet.new()
-	#dialogue_set.load_from_json(dialogue_set_data)
 	var dialogue_position = Vector2((texture.get_size().x/2) * scale.x, 0.0)
 	get_node("DialogueBoxPosition").position = dialogue_position
 	pass
@@ -68,16 +60,13 @@ func _input(_event):
 		
 		
 func _process(_delta):
-	
 	if Input.is_action_just_released("click"):
 		if sprite_status == Status.Selected:
-			var dialogue : DialogueResource = pet.get_random_dialogue_from_set("Intro")
+			var dialogue : DialogueResource = character.get_random_dialogue_from_rarity_set("Intro")
 			DialogueManager._dialogue(dialogue, 
 			get_node("DialogueBoxPosition"))
-			#DialogueManager._dialogue(dialogue_resource_test, 
-			#get_node("DialogueBoxPosition"))
 		if sprite_status == Status.Dragging:
-			pet.emit_signal("dragging_state", false)
+			character.emit_signal("dragging_state", false)
 			
 		sprite_status = Status.None
 			
@@ -85,7 +74,7 @@ func _process(_delta):
 		return
 		
 	if Input.is_action_just_pressed("click"):
-		pet_clicked.emit()
+		character_clicked.emit()
 		sprite_status = Status.Selected
 		click_position = position - get_global_mouse_position()
 		
@@ -100,19 +89,19 @@ func _process(_delta):
 		#FIX THIS LATER SO IT DRAGS BEHIND NICELY
 		#global_position = global_position.lerp(get_global_mouse_position(), SPEED*delta)
 		#global_position = get_global_mouse_position() + mouse_offset
-		pet.emit_signal("dragging_state", true)
+		character.emit_signal("dragging_state", true)
 		rigid_body_2d.position = get_global_mouse_position() + mouse_offset
 		
 	
 	if Input.is_action_just_pressed("right_click"):
-		pet_right_clicked.emit()
+		character_right_clicked.emit()
 		
 		
 	if Input.is_action_just_pressed("scroll_up"):
-		pet._increase_scale()
+		character.increase_scale()
 			
 	elif Input.is_action_just_pressed("scroll_down"):
-		pet._decrease_scale()
+		character.decrease_scale()
 		
 	if Input.is_action_just_released("quit"):
 		get_tree().quit()
@@ -140,8 +129,11 @@ func _animate_via_code():
 		#for y in range(area.position.y, area.end.y):
 			#if Color.TRANSPARENT != image.get_pixel(x, y): return false
 		#return true
+func _on_character_change_scale(current_scale: Vector2) -> void:
+	current_scale_step = current_scale
+	_tween_scale()
 
-func _on_animations_play_animation(animation_data):
+func _on_animation_data_play_animation(animation_data: AnimationData) -> void:
 	if animation_data == current_animation:
 		return
 	
@@ -154,15 +146,6 @@ func _on_animations_play_animation(animation_data):
 		_animate_via_code()
 
 
-func _on_pet_change_scale(current_scale: Vector2) -> void:
-	current_scale_step = current_scale
-	_tween_scale()
-
-
-func _on_base_pet_set_scale_instantly(scale_relative_to_initial_scale: Vector2) -> void:
+func _on_character_set_scale_instantly(scale_relative_to_initial_scale: Vector2) -> void:
 	current_scale_step = scale_relative_to_initial_scale
 	scale = scale_relative_to_initial_scale
-
-
-func _on_animation_data_play_animation(animation_data: AnimationData) -> void:
-	pass # Replace with function body.

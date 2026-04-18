@@ -6,9 +6,9 @@ var current_scale_step : Vector2 = Vector2(1.0,1.0)
 
 var visuals : Sprite2D
 
-func _initialize(pet: Pet, vis : Sprite2D) -> void:
+func _initialize(character: Character, vis : Sprite2D) -> void:
 	visuals = vis
-	pet.change_scale.connect(_on_pet_change_scale)
+	character.change_scale.connect(_on_character_change_scale)
 	set_process(true)
 	
 func _process(_delta: float) -> void:
@@ -19,6 +19,6 @@ func _process(_delta: float) -> void:
 	position = visuals.position - (visuals.texture.get_size()/2.0)*visuals.scale
 	
 
-func _on_pet_change_scale(current_scale: Vector2) -> void:
+func _on_character_change_scale(current_scale: Vector2) -> void:
 	current_scale_step = current_scale
 	
