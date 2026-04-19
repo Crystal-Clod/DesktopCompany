@@ -31,7 +31,8 @@ func get_random_dialogue_from_rarity_set(_set_name : String):
 	var rarity_roll = randf_range(0,100)
 	var rolled_sets : Array[DialogueSet]
 	
-	for d_set in dialogue_sets.dialogue_array:
+	
+	for d_set in dialogue_sets.dialogue_set_array:
 		if d_set.rarity >= rarity_roll:
 			rolled_sets.append(d_set)
 	if len(rolled_sets) == 0:

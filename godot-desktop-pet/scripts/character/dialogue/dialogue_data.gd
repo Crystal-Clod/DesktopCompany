@@ -1,19 +1,29 @@
-@tool
 class_name DialogueData
 extends Node
+@export var use_external = false
 
 @export var dialogue_dictionary : Dictionary[String,DialogueSetArray]
-@export_tool_button("Test Dictionary")
-var button = refresh_dictionary
+@export var internal_dialogue_dictionary : Dictionary[String,DialogueSetArray]
+@export var external_dialogue_dictionary : Dictionary[String,DialogueSetArray]
+var character_folder : String
+
 func _init() -> void:
 	GameManager.character_files_setup.connect(
 		func(character_folder : String):
 			await get_tree().physics_frame
-			_dialogue_setup(character_folder)
+			self.character_folder = character_folder
+			if use_external:
+				_dialogue_external_setup()
+				dialogue_dictionary = external_dialogue_dictionary.duplicate_deep()
+			else:
+				_dialogue_setup()
+				print(internal_dialogue_dictionary)
+				dialogue_dictionary = internal_dialogue_dictionary.duplicate_deep()
+			
 	)
 
-func _dialogue_setup(current_character : String):
-	var dialogue_folder = current_character + "/Dialogue"
+func _dialogue_setup():
+	var dialogue_folder = character_folder + "/Dialogue"
 	
 	var open_directory = DirAccess.open(dialogue_folder)
 	
@@ -23,32 +33,39 @@ func _dialogue_setup(current_character : String):
 	else:
 		print("Directory does NOT exist: ", dialogue_folder)
 		DirAccess.make_dir_absolute(dialogue_folder)
-	
-	for key : String in dialogue_dictionary:
+		
+	var files = FileOperations.get_all_files_of_type_from_directory(dialogue_folder, "json")
+	for key : String in internal_dialogue_dictionary:
 		print(key)
-		var dialogue_set_array : DialogueSetArray = dialogue_dictionary[key]
-		dialogue_set_array.save_to_json(dialogue_folder + "/" + key)
+		var dialogue_set_array : DialogueSetArray = internal_dialogue_dictionary[key]
+		if !files.has(dialogue_folder + "/" + key + ".json"):
+			print("Saved - " + key)
+			dialogue_set_array.save_to_json(dialogue_folder + "/" + key)
+		
+		
+		
 
-func refresh_dictionary():
-	#var files = FileOperations.get_all_files_of_type_from_directory("res://Characters/Donqui/Resources/Dialogue/Intro/","json")
-	#print("1) "+str(files))
-	var files : Array[String]
-	var directories = FileOperations.get_all_sub_directories("res://Characters/Donqui/Resources/Dialogue/")
-	for directory in directories:
-		var files_in_directory = FileOperations.get_all_files_of_type_from_directory(directory,"json")
-		if len(files_in_directory) > 0:
-			#print("2) "+str(files_in_directory))
-			files.append_array(files_in_directory)
-		
-		
-	var resources : DialogueSetArray
+func _dialogue_external_setup():
+	
+	var dialogue_folder = character_folder + "/Dialogue"
+	
+	#var open_directory = DirAccess.open(dialogue_folder)
+	
+	var files = FileOperations.get_all_files_of_type_from_directory(dialogue_folder, "json")
+	#print(files)
+	
 	for file in files:
 		var json = JsonOperations.load_json(file)
 		
-		var dialogue_set : DialogueSet = DialogueSet.new()
-		dialogue_set.load_from_json(json)
-		resources.append(dialogue_set)
-	pass
+		print(json)
+		
+		var dialogue_set_array : DialogueSetArray = DialogueSetArray.new()
+		dialogue_set_array.load_from_json(json)
+		
+		external_dialogue_dictionary.get_or_add("Intro", dialogue_set_array)
 	
-	dialogue_dictionary.get_or_add("Intro",resources)
+	
+
+	
+	
 	

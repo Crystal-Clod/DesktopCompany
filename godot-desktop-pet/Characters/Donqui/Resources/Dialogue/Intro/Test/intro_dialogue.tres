@@ -7,5 +7,5 @@
 
 [resource]
 script = ExtResource("2_yugw0")
-dialogue_array = Array[ExtResource("1_4241c")]([ExtResource("2_s7fyq"), ExtResource("3_s7fyq")])
+dialogue_set_array = Array[ExtResource("1_4241c")]([ExtResource("2_s7fyq"), ExtResource("3_s7fyq")])
 metadata/_custom_type_script = "uid://d3oq0yilev5gq"

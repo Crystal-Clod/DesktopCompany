@@ -12,7 +12,7 @@ var button = _sprite_to_polygon
 @export_tool_button("Clear All Polygons")
 var clear_button = _clear_polygons
 
-var dragging_mouse_position : Vector2
+var previous_position : Vector2
 
 func _init() -> void:
 	#maybe move event to here later
@@ -91,9 +91,9 @@ func _on_character_dragging_state(is_dragging: bool) -> void:
 	freeze = is_dragging
 	
 	if !freeze:
-		var throw_vector : Vector2 = get_global_mouse_position() - global_position
-		var mouse_distance = dragging_mouse_position.distance_to(get_global_mouse_position())
+		var throw_vector : Vector2 = get_global_mouse_position() - previous_position
+		var mouse_distance = previous_position.distance_to(get_global_mouse_position())
 		
 		linear_velocity = throw_vector.normalized() * (mouse_distance * 25)
-	else:
-		dragging_mouse_position = get_global_mouse_position()
+	
+	previous_position = get_global_mouse_position()

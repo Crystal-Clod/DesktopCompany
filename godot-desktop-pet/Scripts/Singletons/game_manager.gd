@@ -1,6 +1,6 @@
 extends Node
 
-signal character_files_setup(character_folder : String)
+signal character_files_setup(current_character : String)
 
 var character_folder : String
 var current_character: String
@@ -33,7 +33,7 @@ func _character_folder_setup(character_name: String):
 		print("Directory does NOT exist: ", current_character)
 		DirAccess.make_dir_absolute(current_character)
 		
-	character_files_setup.emit(character_folder)
+	character_files_setup.emit(current_character)
 		
 
 	
