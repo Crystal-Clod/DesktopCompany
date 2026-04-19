@@ -24,7 +24,7 @@ func _init() -> void:
 	pass
 
 func get_random_dialogue_from_rarity_set(_set_name : String):
-	var dialogue_sets : DialogueSetArray = dialogue_data.dialogue_dictionary.get("Intro")
+	var dialogue_sets : DialogueSetArray = dialogue_data.dialogues.get("Intro")
 	if dialogue_sets == null:
 		push_error("EMPTY DIALOGUE SET - RARITY")
 	
@@ -44,7 +44,7 @@ func get_random_dialogue_from_rarity_set(_set_name : String):
 	return dialogue 
 
 func get_random_dialogue_from_set(_set_name : String):
-	var dialogue_sets : DialogueSetArray = dialogue_data.dialogue_dictionary.get("Intro")
+	var dialogue_sets : DialogueSetArray = dialogue_data.dialogues.get("Intro")
 	
 	if dialogue_sets == null:
 		push_error("EMPTY DIALOGUE SET - RANDOM")

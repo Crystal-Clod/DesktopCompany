@@ -39,7 +39,7 @@ static func get_all_files_of_type_from_directory(path : String, extension : Stri
 	
 	return files
 
-static func get_all_sub_directories(path):
+static func get_all_sub_directories(path : String):
 	var directories : Array
 	
 	var dir = DirAccess.open(path)
@@ -60,3 +60,12 @@ static func get_all_sub_directories(path):
 	else:
 		print("An error occurred when trying to access the path.")
 	return directories
+	
+static func check_if_directory_exists(path : String):
+	var open_directory = DirAccess.open(path)
+	if open_directory:
+		#print("Directory exists: ", dialogue_folder)
+		pass
+	else:
+		print("Directory does NOT exist: ", path)
+		DirAccess.make_dir_absolute(path)

@@ -1,19 +1,21 @@
 [gd_scene format=3 uid="uid://b06qqkxhudf00"]
 
 [ext_resource type="Script" uid="uid://c8cppnf3jxc4w" path="res://scripts/character.gd" id="1_hwrxk"]
-[ext_resource type="Script" uid="uid://d3oq0yilev5gq" path="res://scripts/character/dialogue/dialogue_set_array.gd" id="2_m34qp"]
-[ext_resource type="Resource" uid="uid://bglc4wge2t7co" path="res://Characters/Donqui/Resources/Dialogue/Intro/Test/intro_dialogue.tres" id="3_4x6i1"]
 [ext_resource type="Script" uid="uid://dbngoo47aks2" path="res://scripts/rigidbody.gd" id="5_6uj7u"]
 [ext_resource type="Texture2D" uid="uid://1a80skx48fj1" path="res://Characters/Donqui/Sprites/Animations/Idle/Idle_1.png" id="6_xjgar"]
+[ext_resource type="Script" uid="uid://gxojcvy7iqif" path="res://scripts/character/animation/animation_resource_collection.gd" id="7_kf7yf"]
 [ext_resource type="Script" uid="uid://cshigjlwu0gq3" path="res://scripts/visuals.gd" id="7_sr8t1"]
+[ext_resource type="Resource" uid="uid://due1hx0n4pr62" path="res://ResourcesTest/Animation/Idle/idle_animation_array.tres" id="8_qr5ao"]
 [ext_resource type="Resource" uid="uid://cy0pc1qyglcvr" path="res://Characters/Donqui/Resources/Dialogue/Intro/DialogueTest.tres" id="8_y5nxr"]
-[ext_resource type="Script" uid="uid://c3ljpo8a7yqrv" path="res://scripts/character/animation/animations.gd" id="9_y21ce"]
+[ext_resource type="Resource" uid="uid://ch5jiue42tcuh" path="res://ResourcesTest/Animation/Blink/blink_animation_array.tres" id="9_ew1v7"]
+[ext_resource type="Script" uid="uid://c3ljpo8a7yqrv" path="res://scripts/character/animation/animation_data.gd" id="9_y21ce"]
 [ext_resource type="Script" uid="uid://cp546aqicfayl" path="res://scripts/character/animation/state_machine/animation_state_machine.gd" id="10_3g4af"]
 [ext_resource type="Script" uid="uid://bvntva275opvt" path="res://scripts/character/animation/state_machine/animation_state_templates/animation_state_data.gd" id="10_4x6i1"]
+[ext_resource type="Resource" uid="uid://bmirr4tmg2cl6" path="res://ResourcesTest/Animation/Yap/yap_animation_array.tres" id="10_f7ad1"]
 [ext_resource type="Script" uid="uid://bi8p4nlwsoe5p" path="res://scripts/character/animation/state_machine/animation_state_templates/animation_with_rules_state.gd" id="11_j0ffh"]
 [ext_resource type="Resource" uid="uid://c6ir2haeyxxqp" path="res://resources/state_rules/timer_rule.tres" id="12_6uj7u"]
 [ext_resource type="Resource" uid="uid://oskxnltuckqf" path="res://resources/state_rules/animation_end_rule.tres" id="13_xjgar"]
-[ext_resource type="Script" uid="uid://c2f58r2jur6le" path="res://scripts/character/animation/animation_data.gd" id="13_y21ce"]
+[ext_resource type="Script" uid="uid://c2f58r2jur6le" path="res://scripts/character/animation/animation_resource.gd" id="13_y21ce"]
 [ext_resource type="Script" uid="uid://coef0ue3mi4b8" path="res://resources/state_rules/animation_end_rule.gd" id="14_xjgar"]
 [ext_resource type="Texture2D" uid="uid://o6ulboplb1e6" path="res://Characters/Donqui/Sprites/Animations/Blink/Blink_1.png" id="15_4x6i1"]
 [ext_resource type="Texture2D" uid="uid://cse13hr70jope" path="res://Characters/Donqui/Sprites/Animations/Yap/Yap1_12.png" id="17_kqn0q"]
@@ -22,8 +24,6 @@
 [sub_resource type="Resource" id="Resource_3p6sd"]
 script = ExtResource("13_y21ce")
 animation_name = "Idle"
-animation_type = "Idle"
-file_name = "Idle_1.png"
 frame_amount = 1
 spritesheet = ExtResource("6_xjgar")
 metadata/_custom_type_script = "uid://c2f58r2jur6le"
@@ -31,8 +31,6 @@ metadata/_custom_type_script = "uid://c2f58r2jur6le"
 [sub_resource type="Resource" id="Resource_m34qp"]
 script = ExtResource("13_y21ce")
 animation_name = "Blink"
-animation_type = "Blink"
-file_name = "Blink_1.png"
 frame_amount = 1
 spritesheet = ExtResource("15_4x6i1")
 metadata/_custom_type_script = "uid://c2f58r2jur6le"
@@ -44,8 +42,6 @@ metadata/_custom_type_script = "uid://coef0ue3mi4b8"
 [sub_resource type="Resource" id="Resource_c786b"]
 script = ExtResource("13_y21ce")
 animation_name = "Yap"
-animation_type = "Yap"
-file_name = "Yap1_12.png"
 frame_amount = 12
 spritesheet = ExtResource("17_kqn0q")
 metadata/_custom_type_script = "uid://c2f58r2jur6le"
@@ -72,6 +68,21 @@ drag_offset = 20.0
 
 [node name="DialogueBoxPosition" type="Node2D" parent="RigidBody2D/Visuals" unique_id=1383435906]
 position = Vector2(75, 0)
+
+[node name="AnimationData" type="Node" parent="." unique_id=456425652]
+unique_name_in_owner = true
+script = ExtResource("9_y21ce")
+current_character = "Donqui"
+current_animation = "Yap"
+internal_animations = Dictionary[String, ExtResource("7_kf7yf")]({
+"Blink": ExtResource("9_ew1v7"),
+"Idle": ExtResource("8_qr5ao"),
+"Yap": ExtResource("10_f7ad1")
+})
+
+[node name="AnimationStateData" type="Node" parent="." unique_id=1801647229]
+unique_name_in_owner = true
+script = ExtResource("10_4x6i1")
 
 [node name="AnimationStateMachine" type="Node" parent="." unique_id=56706689 node_paths=PackedStringArray("initial_state")]
 unique_name_in_owner = true
@@ -103,19 +114,6 @@ animation_data = SubResource("Resource_c786b")
 unique_name_in_owner = true
 script = ExtResource("19_kqn0q")
 use_external = true
-internal_dialogue_dictionary = Dictionary[String, ExtResource("2_m34qp")]({
-"Intro": ExtResource("3_4x6i1")
-})
-
-[node name="AnimationStateData" type="Node" parent="." unique_id=1801647229]
-unique_name_in_owner = true
-script = ExtResource("10_4x6i1")
-
-[node name="AnimationData" type="Node" parent="." unique_id=456425652]
-unique_name_in_owner = true
-script = ExtResource("9_y21ce")
-current_character = "Donqui"
-current_animation = "Yap"
 
 [connection signal="change_scale" from="." to="RigidBody2D/Visuals" method="_on_character_change_scale"]
 [connection signal="dragging_state" from="." to="RigidBody2D" method="_on_character_dragging_state"]

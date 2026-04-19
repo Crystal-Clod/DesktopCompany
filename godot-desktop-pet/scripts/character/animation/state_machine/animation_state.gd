@@ -3,7 +3,7 @@ class_name AnimationState
 extends Node
 
 @export var state_name : String = ""
-@export var animation_data: AnimationData
+@export var animation_data: AnimationResource
 
 @export_category("JSON")
 @export var character_name = "Donqui"

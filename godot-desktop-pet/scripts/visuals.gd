@@ -27,7 +27,7 @@ var sprite_status : Status
 @export var drag_offset: float = 0.5
 
 var current_scale_step : Vector2 = Vector2(1.0,1.0)
-var current_animation : AnimationData
+var current_animation : AnimationResource
 func _init() -> void:
 	Events.pointer_changed_screens.connect(
 		func():
@@ -133,7 +133,7 @@ func _on_character_change_scale(current_scale: Vector2) -> void:
 	current_scale_step = current_scale
 	_tween_scale()
 
-func _on_animation_data_play_animation(animation_data: AnimationData) -> void:
+func _on_animation_data_play_animation(animation_data: AnimationResource) -> void:
 	if animation_data == current_animation:
 		return
 	
