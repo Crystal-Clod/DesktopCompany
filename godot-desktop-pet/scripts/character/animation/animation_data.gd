@@ -16,6 +16,7 @@ signal play_animation (animation_data:AnimationResource)
 @onready var animation_state_machine: AnimationStateMachine = %AnimationStateMachine
 
 var character_folder : String
+var animation_folder : String
 var can_blink = true
 var blink_is_running = false
 
@@ -26,6 +27,7 @@ func _ready():
 		func(character_folder : String):
 			await get_tree().physics_frame
 			self.character_folder = character_folder
+			animation_folder = character_folder + "/Animation"
 			
 			_save_internal_to_files()
 			_load_external_from_files()
@@ -43,8 +45,6 @@ func _ready():
 	DialogueManager.talking_starts.connect(_start_talking)
 	
 func _save_internal_to_files():
-	var animation_folder = character_folder + "/Animation"
-	
 	FileOperations.check_if_directory_exists(animation_folder)
 		
 	for key : String in internal_animations:
@@ -57,12 +57,32 @@ func _save_internal_to_files():
 		
 		var animation_resources : Array[AnimationResource] = animation_resource_collection.animation_data_collection
 		for resource : AnimationResource in animation_resources:
-			resource.spritesheet.get_image().save_png(animation_resource_folder + "/" + resource.animation_name + ".png")
+			if overwrite_files:
+				resource.spritesheet.get_image().save_png(animation_resource_folder + "/" + resource.animation_name + ".png")
 		
 		
 		
 func _load_external_from_files():
-	
+	var directories = FileOperations.get_all_sub_directories(animation_folder + "/")
+	for directory : String in directories:
+		var json = JsonOperations.load_json(directory + "/" + directory.trim_prefix(animation_folder + "/") + ".json" )	
+		var animation_resources : AnimationResourceCollection = AnimationResourceCollection.new()
+		animation_resources.load_from_json(json)
+		
+			
+		var image_files = FileOperations.get_all_files_of_type_from_directory(directory + "/", "png")
+		for file : String in image_files:
+			for resource in animation_resources.animation_data_collection:
+				if resource.animation_name == file.trim_prefix(directory + "/").trim_suffix(".png"):
+					var image : Image = Image.new()
+					image.load(file)
+					var texture = ImageTexture.new()
+					texture = ImageTexture.create_from_image(image)
+					resource.spritesheet = texture
+				
+		
+		external_animations.get_or_add(directory.lstrip(animation_folder + "/"), animation_resources)
+			
 	pass
 
 func _blink():

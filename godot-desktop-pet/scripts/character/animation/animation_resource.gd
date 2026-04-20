@@ -3,7 +3,7 @@ class_name AnimationResource
 
 @export var animation_name: String
 @export var frame_count : int
-@export var spritesheet : CompressedTexture2D
+@export var spritesheet : Texture2D
 
 func get_json_data():
 	var json_data : Dictionary = {

@@ -53,8 +53,6 @@ func _load_external_from_files():
 	for file in files:
 		var json = JsonOperations.load_json(file)
 		
-		print(json)
-		
 		var dialogue_set_array : DialogueSetArray = DialogueSetArray.new()
 		dialogue_set_array.load_from_json(json)
 		

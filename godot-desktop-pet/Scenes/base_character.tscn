@@ -71,6 +71,7 @@ unique_name_in_owner = true
 script = ExtResource("9_y21ce")
 current_character = "Donqui"
 current_animation = "Yap"
+use_external = true
 internal_animations = Dictionary[String, ExtResource("7_kf7yf")]({
 "Blink": ExtResource("9_ew1v7"),
 "Idle": ExtResource("8_qr5ao"),
