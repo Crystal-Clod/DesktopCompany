@@ -33,22 +33,23 @@ func _init() -> void:
 	Events.pointer_changed_screens.connect(
 		func():
 			if sprite_status == Status.Dragging:
-				DisplayServer.window_set_current_screen(DisplayServer.SCREEN_WITH_MOUSE_FOCUS)
-				Events.game_changed_screens.emit()
+				Events.change_game_screen.emit()
 	)
-	Events.resolution_set.connect(
-		func():
-			var max_iterations: int = 5
-			var current_iteration: int = 0
-			while get_viewport_rect().size.x/(texture.get_size().x*current_iteration) > 10:
-				if(current_iteration >= max_iterations):
-					return
-				current_iteration += 1
+	
+	#Events.resolution_set.connect(resize_character)
+
+func resize_character():
+	var max_iterations: int = 5
+	var current_iteration: int = 0
+	while get_viewport_rect().size.x/(texture.get_size().x*current_iteration) > 10:
+		if(current_iteration >= max_iterations):
+			return
+		current_iteration += 1
 				
-			character._set_scale_instantly(Vector2.ONE * current_iteration)
-			)
-			
+	character._set_scale_instantly(Vector2.ONE * current_iteration)
+
 func  _ready():
+	resize_character()
 	var dialogue_position = Vector2((texture.get_size().x/2) * scale.x, 0.0)
 	dialogue_box_position.position = dialogue_position
 	pass

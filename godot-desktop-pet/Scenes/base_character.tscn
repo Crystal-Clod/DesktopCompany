@@ -162,5 +162,5 @@ stream = SubResource("AudioStreamRandomizer_tpmf6")
 [connection signal="dragging_state" from="." to="RigidBody2D" method="_on_character_dragging_state"]
 [connection signal="set_scale_instantly" from="." to="RigidBody2D/Visuals" method="_on_character_set_scale_instantly"]
 [connection signal="character_clicked" from="RigidBody2D/Visuals" to="SoundData" method="_on_visuals_character_clicked"]
-[connection signal="play_animation" from="AnimationData" to="RigidBody2D/Visuals" method="_on_animation_data_play_animation"]
 [connection signal="play_animation" from="AnimationData" to="RigidBody2D/Visuals" method="_on_animations_play_animation"]
+[connection signal="play_animation" from="AnimationData" to="RigidBody2D/Visuals" method="_on_animation_data_play_animation"]

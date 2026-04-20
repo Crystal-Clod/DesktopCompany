@@ -3,4 +3,5 @@ extends Node
 signal resolution_set
 
 signal pointer_changed_screens
+signal change_game_screen
 signal game_changed_screens
