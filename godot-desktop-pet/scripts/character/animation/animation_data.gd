@@ -6,6 +6,7 @@ signal play_animation (animation_data:AnimationResource)
 @export var current_animation : String
 
 @export var use_external : bool
+@export var overwrite_files : bool = false
 
 @export var animations: Dictionary[String,AnimationResourceCollection]
 
@@ -27,9 +28,10 @@ func _ready():
 			self.character_folder = character_folder
 			
 			_save_internal_to_files()
+			_load_external_from_files()
 			
 			if use_external:
-				print("External")
+				animations = external_animations.duplicate_deep()
 			else:
 				animations = internal_animations.duplicate_deep()
 			_blink()
@@ -45,9 +47,6 @@ func _save_internal_to_files():
 	
 	FileOperations.check_if_directory_exists(animation_folder)
 		
-	#var sub_directories = FileOperations.get_all_sub_directories(animation_folder)
-		
-	
 	for key : String in internal_animations:
 		var animation_resource_folder : String = animation_folder + "/" + key
 		FileOperations.check_if_directory_exists(animation_resource_folder)
@@ -62,20 +61,9 @@ func _save_internal_to_files():
 		
 		
 		
-func external_setup():
-	#var animation_directories = ResourceLoader.list_directory("res://Characters/" + current_character + "/Sprites/Animations/")
-#
-	#for animation in animation_directories:
-		#animation = animation.trim_suffix("/")
+func _load_external_from_files():
+	
 	pass
-
-	
-
-	
-	
-func _load_json(json_name : String):
-	pass
-	
 
 func _blink():
 	blink_is_running = true

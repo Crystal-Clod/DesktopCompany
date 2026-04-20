@@ -11,3 +11,8 @@ func get_json_data():
 		"FrameCount" : frame_count
 	}
 	return json_data
+	
+func load_from_json(json_data : Dictionary):
+	animation_name = json_data.get("AnimationName")
+	frame_count = json_data.get("FrameCount")
+	

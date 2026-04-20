@@ -2,7 +2,6 @@
 extends Resource
 class_name DialogueSet
 
-
 @export_range(0,100, 0.1) var rarity : float = 100
 @export var dialogues : Array[DialogueResource]
 

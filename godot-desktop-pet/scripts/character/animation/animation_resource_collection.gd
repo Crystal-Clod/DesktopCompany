@@ -8,11 +8,11 @@ func save_to_json(path : String):
 
 func get_json_data():
 	var json_data : Dictionary = {
-		"AnimationDataArray" : dialogue_set_to_data()
+		"AnimationDataArray" : animation_resources_to_data()
 	}
 	return json_data
 	
-func dialogue_set_to_data():
+func animation_resources_to_data():
 	var animation_data : Array[Dictionary]
 	
 	for animation_resource in animation_data_collection:
@@ -20,3 +20,16 @@ func dialogue_set_to_data():
 		animation_data.append(data_to_add)
 	
 	return animation_data
+
+func load_from_json(json_data : Dictionary):
+	var array_of_resources : Array = json_data.get("AnimationDataArray")
+	
+	var animation_resource_array : Array[AnimationResource]
+	for resource in array_of_resources:
+		var animation_resource = AnimationResource.new()
+		
+		animation_resource.load_from_json(resource)
+		
+		animation_resource_array.append(animation_resource)
+	
+	animation_data_collection = animation_resource_array
