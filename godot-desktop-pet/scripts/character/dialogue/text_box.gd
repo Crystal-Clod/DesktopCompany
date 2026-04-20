@@ -5,6 +5,9 @@ class_name TextBox
 @onready var label = $MarginContainer/RichTextLabel
 @onready var timer = $LetterDisplayTimer
 
+@onready var base_typewriter_sound: AudioStreamPlayer = %BaseTypewriterSound
+@onready var punctuation_typewriter_sound: AudioStreamPlayer = %PunctuationTypewriterSound
+
 const MAX_WIDTH = 256
 
 var text = ""
@@ -46,6 +49,7 @@ func  _display_text(dialogue_line : DialogueLine):
 func  _display_letter():
 	#label.text += text[letter_index]
 	
+	
 	label.visible_characters += 1
 	
 	letter_index = label.visible_characters - 1
@@ -56,10 +60,12 @@ func  _display_letter():
 	
 	match  text[letter_index]:
 		"!", ".", ",", "?":
+			punctuation_typewriter_sound.play()
 			timer.start(punctuation_time)
 		" ":
 			timer.start(space_time)
 		_:
+			base_typewriter_sound.play()
 			timer.start(letter_time)
 		
 

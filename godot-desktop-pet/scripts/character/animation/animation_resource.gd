@@ -3,12 +3,14 @@ class_name AnimationResource
 
 @export var animation_name: String
 @export var frame_count : int
+@export var dialogue_box_offset : Vector2
 @export var spritesheet : Texture2D
 
 func get_json_data():
 	var json_data : Dictionary = {
 		"AnimationName" : animation_name,
-		"FrameCount" : frame_count
+		"FrameCount" : frame_count,
+		"DialogueBoxOffset" : dialogue_box_offset
 	}
 	return json_data
 	

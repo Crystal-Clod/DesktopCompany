@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AnimationResourceCollection" format=3 uid="uid://ch5jiue42tcuh"]
+
+[ext_resource type="Script" uid="uid://c2f58r2jur6le" path="res://scripts/character/animation/animation_resource.gd" id="1_3ctln"]
+[ext_resource type="Resource" uid="uid://dj1850pukssd4" path="res://resources/animation/blink/blink_animation.tres" id="2_i4q4s"]
+[ext_resource type="Script" uid="uid://gxojcvy7iqif" path="res://scripts/character/animation/animation_resource_collection.gd" id="3_ovtrd"]
+
+[resource]
+script = ExtResource("3_ovtrd")
+animation_data_collection = Array[ExtResource("1_3ctln")]([ExtResource("2_i4q4s")])
+metadata/_custom_type_script = "uid://gxojcvy7iqif"

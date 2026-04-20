@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://bxf0mdwimy5pq"]
+
+[ext_resource type="Texture2D" uid="uid://c7m5j7uqg0u1x" path="res://text_box/TextBox.png" id="1_1u4do"]
+[ext_resource type="Script" uid="uid://nneuuebaujk0" path="res://scripts/character/dialogue/text_box.gd" id="1_45ox4"]
+[ext_resource type="FontFile" uid="uid://dp3pyum7miuwb" path="res://text_box/windows-xp-tahoma.otf" id="3_joub5"]
+[ext_resource type="AudioStream" uid="uid://uj2efk2e3fjb" path="res://sounds/typewriter_hard_mixkit.wav" id="4_3ojeh"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nq18v"]
+random_pitch = 1.122462
+random_volume_offset_db = 5.0
+streams_count = 1
+stream_0/stream = ExtResource("4_3ojeh")
+
+[node name="TextBox" type="MarginContainer" unique_id=1252097381]
+clip_contents = true
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -300.0
+offset_right = 128.0
+offset_bottom = -284.0
+grow_vertical = 2
+script = ExtResource("1_45ox4")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=945757479]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("1_1u4do")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1414613268]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=1626023250]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0.19215687, 0.06666667, 0.1764706, 1)
+theme_override_fonts/normal_font = ExtResource("3_joub5")
+fit_content = true
+vertical_alignment = 1
+visible_characters_behavior = 1
+
+[node name="LetterDisplayTimer" type="Timer" parent="." unique_id=2131577633]
+one_shot = true
+
+[node name="BaseTypewriterSound" type="AudioStreamPlayer" parent="." unique_id=1231625275]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_nq18v")
+
+[node name="PunctuationTypewriterSound" type="AudioStreamPlayer" parent="." unique_id=1301910524]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_nq18v")
+
+[connection signal="timeout" from="LetterDisplayTimer" to="." method="_on_letter_display_timer_timeout"]

@@ -3,6 +3,7 @@ extends Sprite2D
 @export var character : Character
 
 @export var dialogue_resource_test : DialogueResource
+@onready var dialogue_box_position: Node2D = %DialogueBoxPosition
 
 signal character_clicked
 signal character_right_clicked
@@ -49,7 +50,7 @@ func _init() -> void:
 			
 func  _ready():
 	var dialogue_position = Vector2((texture.get_size().x/2) * scale.x, 0.0)
-	get_node("DialogueBoxPosition").position = dialogue_position
+	dialogue_box_position.position = dialogue_position
 	pass
 	
 func _input(_event):
@@ -64,7 +65,7 @@ func _process(_delta):
 		if sprite_status == Status.Selected:
 			var dialogue : DialogueResource = character.get_random_dialogue_from_rarity_set("Intro")
 			DialogueManager._dialogue(dialogue, 
-			get_node("DialogueBoxPosition"))
+			dialogue_box_position)
 		if sprite_status == Status.Dragging:
 			character.emit_signal("dragging_state", false)
 			

@@ -7,7 +7,7 @@ signal finished_displaying
 
 signal talking_starts (animation_name : String)
 
-@onready var text_box_scene = preload("res://Scenes/TextBox.tscn")
+@onready var text_box_scene = preload("res://scenes/text_box.tscn")
 
 var current_dialogue : DialogueResource
 var current_line_index = 0

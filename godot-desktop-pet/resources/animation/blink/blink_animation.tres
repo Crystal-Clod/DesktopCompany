@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AnimationResource" format=3 uid="uid://dj1850pukssd4"]
+
+[ext_resource type="Script" uid="uid://c2f58r2jur6le" path="res://scripts/character/animation/animation_resource.gd" id="1_q7kmy"]
+[ext_resource type="Texture2D" uid="uid://o6ulboplb1e6" path="res://sprites/animations/blink/Blink.png" id="2_mxwvj"]
+
+[resource]
+script = ExtResource("1_q7kmy")
+animation_name = "Blink"
+frame_count = 1
+spritesheet = ExtResource("2_mxwvj")
+metadata/_custom_type_script = "uid://c2f58r2jur6le"

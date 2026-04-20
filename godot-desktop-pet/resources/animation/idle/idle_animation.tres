@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AnimationResource" format=3 uid="uid://b4fi50nfleuy"]
+
+[ext_resource type="Script" uid="uid://c2f58r2jur6le" path="res://scripts/character/animation/animation_resource.gd" id="1_m1vmm"]
+[ext_resource type="Texture2D" uid="uid://1a80skx48fj1" path="res://sprites/animations/idle/Idle.png" id="2_42f0a"]
+
+[resource]
+script = ExtResource("1_m1vmm")
+animation_name = "Idle"
+frame_count = 1
+spritesheet = ExtResource("2_42f0a")
+metadata/_custom_type_script = "uid://c2f58r2jur6le"
