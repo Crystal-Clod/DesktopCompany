@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AnimationDataCollection" format=3 uid="uid://due1hx0n4pr62"]
+[gd_resource type="Resource" script_class="AnimationResourceCollection" format=3 uid="uid://due1hx0n4pr62"]
 
 [ext_resource type="Script" uid="uid://c2f58r2jur6le" path="res://scripts/character/animation/animation_resource.gd" id="1_4oit8"]
 [ext_resource type="Resource" uid="uid://b4fi50nfleuy" path="res://resources/animation/idle/idle_animation.tres" id="2_ubh20"]

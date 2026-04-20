@@ -79,34 +79,40 @@ func _load_external_from_files():
 					var texture = ImageTexture.new()
 					texture = ImageTexture.create_from_image(image)
 					resource.spritesheet = texture
-				
+					
 		
-		external_animations.get_or_add(directory.lstrip(animation_folder + "/"), animation_resources)
-			
-	pass
+		
+		external_animations.get_or_add(directory.trim_prefix(animation_folder + "/"), animation_resources)
+	
+	print(external_animations)
 
 func _blink():
 	blink_is_running = true
 	if(!can_blink):
 		blink_is_running = false
 		return
+		
+	animation_state_machine.play_animation("Idle")
 	play_animation.emit(_get_animation_data_collection("Idle",0))
 	
-	#animation_state_machine.play_animation("Idle")
+	
 	
 	await  get_tree().create_timer(rng.randf_range(0.5,3)).timeout
 	if(!can_blink):
 		blink_is_running = false
 		return
+	
+	animation_state_machine.play_animation("Blink")
 	play_animation.emit(_get_animation_data_collection("Blink",0))
 	
-	#animation_state_machine.play_animation("Blink")
+	
 	await  get_tree().create_timer(_get_animation_data_collection("Blink",0).frame_count/6.0).timeout
 	
 	_blink()
 
-func _get_animation_data_collection(collection : String, which_collection : int):
-	return animations.get(collection).animation_data_collection[which_collection]
+func _get_animation_data_collection(animation_name : String, which_collection : int):
+	#print(animations)
+	return animations.get(animation_name).animation_data_collection[which_collection]
 
 func  _finished_dialogue():
 	can_blink = true

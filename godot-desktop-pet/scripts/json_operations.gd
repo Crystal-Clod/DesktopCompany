@@ -22,6 +22,6 @@ static  func save_json(_json_data : Dictionary, _path : String):
 
 static func load_json(_path : String) -> Dictionary:
 	var data_file = FileAccess.open(_path, FileAccess.READ)
-	print(data_file)
+	#print(data_file)
 	var parsed_result = JSON.parse_string(data_file.get_as_text())
 	return parsed_result

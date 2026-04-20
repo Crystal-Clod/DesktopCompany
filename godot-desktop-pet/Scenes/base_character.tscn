@@ -107,7 +107,7 @@ unique_name_in_owner = true
 script = ExtResource("9_y21ce")
 current_character = "Donqui"
 current_animation = "Yap"
-overwrite_files = true
+use_external = true
 internal_animations = Dictionary[String, ExtResource("7_kf7yf")]({
 "Blink": ExtResource("9_ew1v7"),
 "Idle": ExtResource("8_qr5ao"),
@@ -147,7 +147,7 @@ animation_data = SubResource("Resource_c786b")
 [node name="DialogueData" type="Node" parent="." unique_id=281212822]
 unique_name_in_owner = true
 script = ExtResource("19_kqn0q")
-overwrite_files = true
+use_external = true
 internal_dialogues = Dictionary[String, ExtResource("21_tpmf6")]({
 "Intro": ExtResource("22_56lb1")
 })

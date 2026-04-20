@@ -11,11 +11,11 @@ Executive Manager!"
 
 [sub_resource type="Resource" id="Resource_qy24d"]
 script = ExtResource("2_t078y")
-line = "Tis' just another test."
+line = "How has thine day been?"
 
 [sub_resource type="Resource" id="Resource_65iai"]
 script = ExtResource("2_t078y")
-line = "Hopefully it will end without fail!"
+line = "Mine hath been splendid!"
 
 [sub_resource type="Resource" id="Resource_ixviq"]
 script = ExtResource("1_1xlom")
@@ -23,7 +23,7 @@ dialogue_lines = Array[ExtResource("2_t078y")]([SubResource("Resource_j3t80"), S
 
 [sub_resource type="Resource" id="Resource_08ajf"]
 script = ExtResource("2_t078y")
-line = "Tis' the shorter test."
+line = "Would you like to partake in reading \"Fixers Monthly\" with me, Executive Manager?"
 
 [sub_resource type="Resource" id="Resource_ktutn"]
 script = ExtResource("1_1xlom")

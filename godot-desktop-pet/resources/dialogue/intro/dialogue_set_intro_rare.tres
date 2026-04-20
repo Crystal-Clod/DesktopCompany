@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_08ajf"]
 script = ExtResource("2_g78hx")
-line = "BITCH"
+line = "Verily, you have found a rare dialogue line!"
 
 [sub_resource type="Resource" id="Resource_ktutn"]
 script = ExtResource("1_y8xl3")

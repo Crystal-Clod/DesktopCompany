@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AnimationDataCollection" format=3 uid="uid://bmirr4tmg2cl6"]
+[gd_resource type="Resource" script_class="AnimationResourceCollection" format=3 uid="uid://bmirr4tmg2cl6"]
 
 [ext_resource type="Script" uid="uid://c2f58r2jur6le" path="res://scripts/character/animation/animation_resource.gd" id="1_01ys8"]
 [ext_resource type="Resource" uid="uid://ci5sryyxvhnwf" path="res://resources/animation/yap/yap_animation.tres" id="2_hpeug"]
