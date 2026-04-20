@@ -49,61 +49,33 @@ func _save_internal_to_files():
 		
 	
 	for key : String in internal_animations:
-		print("animation")
 		var animation_resource_folder : String = animation_folder + "/" + key
 		FileOperations.check_if_directory_exists(animation_resource_folder)
-		#var dialogue_set_array : DialogueSetArray = internal_dialogues[key]
-		#if !files.has(dialogue_folder + "/" + key + ".json"):
-			#dialogue_set_array.save_to_json(dialogue_folder + "/" + key)
-
+		var animation_resource_collection : AnimationResourceCollection = internal_animations[key]
+		var files = FileOperations.get_all_files_of_type_from_directory(animation_resource_folder + "/", "json")
+		if !files.has(animation_resource_folder + "/" + key + ".json"):
+			animation_resource_collection.save_to_json(animation_resource_folder + "/" + key)
+		
+		var animation_resources : Array[AnimationResource] = animation_resource_collection.animation_data_collection
+		for resource : AnimationResource in animation_resources:
+			resource.spritesheet.get_image().save_png(animation_resource_folder + "/" + resource.animation_name + ".png")
+		
+		
+		
 func external_setup():
-	var animation_directories = ResourceLoader.list_directory("res://Characters/" + current_character + "/Sprites/Animations/")
+	#var animation_directories = ResourceLoader.list_directory("res://Characters/" + current_character + "/Sprites/Animations/")
+#
+	#for animation in animation_directories:
+		#animation = animation.trim_suffix("/")
+	pass
 
-	for animation in animation_directories:
-		animation = animation.trim_suffix("/")
-		_load_animations_from_path(animation)
+	
 
-	
-func _load_animation(animation_name : String, animation_type : String) -> AnimationResource:
-	var temp_anim = AnimationResource.new()
-	var temp_path = "res://Characters/" + current_character + "/Sprites/Animations/"+ animation_type + "/" + animation_name
-	temp_anim.spritesheet = ResourceLoader.load(temp_path)
-	
-	temp_anim.animation_type = current_animation
-	
-	var split_name = temp_path.split("/")
-	
-	temp_anim.file_name = split_name[split_name.size()-1]
-	temp_anim.animation_name = temp_anim.file_name.get_basename()
-	
-	split_name = temp_anim.animation_name.split("_")
-	temp_anim.frame_amount = split_name[split_name.size()-1].to_int()
-	return temp_anim
-	
-	
-func _load_animations_from_path(animation : String):
-	var temp_path = "res://Characters/" + current_character + "/Sprites/Animations/"+ animation
-	var files_in_directory = ResourceLoader.list_directory(temp_path)
-	#print(files_in_directory)
-	for file in files_in_directory:
-		if(file.ends_with(".json")):
-			_load_json(file)
-			files_in_directory.erase(file)
-			break
-	
-	var temp_animation_collection = AnimationResourceCollection.new() 
-	for file in files_in_directory:
-		if(file.ends_with(".png")):	
-			temp_animation_collection.animation_data_collection.append(_load_animation(file, animation))
-			
-	if(!animations.get(animation)):
-		animations.get_or_add(animation,temp_animation_collection)
 	
 	
 func _load_json(json_name : String):
-	var json_path = "res://Characters/" + current_character + "/Sprites/Animations/"+ current_animation+ "/" + json_name
-	var data_file = FileAccess.open(json_path, FileAccess.READ)
-	var parsed_result = JSON.parse_string(data_file.get_as_text())
+	pass
+	
 
 func _blink():
 	blink_is_running = true
@@ -121,7 +93,7 @@ func _blink():
 	play_animation.emit(_get_animation_data_collection("Blink",0))
 	
 	#animation_state_machine.play_animation("Blink")
-	await  get_tree().create_timer(_get_animation_data_collection("Blink",0).frame_amount/6.0).timeout
+	await  get_tree().create_timer(_get_animation_data_collection("Blink",0).frame_count/6.0).timeout
 	
 	_blink()
 

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_m1vmm")
-animation_name = "Idle_1"
-frame_amount = 1
+animation_name = "Idle"
+frame_count = 1
 spritesheet = ExtResource("2_42f0a")
 metadata/_custom_type_script = "uid://c2f58r2jur6le"

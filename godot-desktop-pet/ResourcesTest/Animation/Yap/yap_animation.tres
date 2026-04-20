@@ -1,13 +1,11 @@
-[gd_resource type="Resource" script_class="AnimationData" format=3 uid="uid://ci5sryyxvhnwf"]
+[gd_resource type="Resource" script_class="AnimationResource" format=3 uid="uid://ci5sryyxvhnwf"]
 
 [ext_resource type="Script" uid="uid://c2f58r2jur6le" path="res://scripts/character/animation/animation_resource.gd" id="1_jm36r"]
 [ext_resource type="Texture2D" uid="uid://cse13hr70jope" path="res://Characters/Donqui/Sprites/Animations/Yap/Yap1_12.png" id="2_8j5u6"]
 
 [resource]
 script = ExtResource("1_jm36r")
-animation_name = "Yap_1"
-animation_type = "Yap"
-file_name = "Yap_1.png"
-frame_amount = 12
+animation_name = "Yap"
+frame_count = 12
 spritesheet = ExtResource("2_8j5u6")
 metadata/_custom_type_script = "uid://c2f58r2jur6le"

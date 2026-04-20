@@ -5,7 +5,7 @@ var timer: SceneTreeTimer
 
 func init(animation_state: AnimationState = null) -> void:
 	timer = Engine.get_main_loop().create_timer(
-		animation_state.animation_data.frame_amount/6.0)
+		animation_state.animation_data.frame_count/6.0)
 		
 	timer_ended = false
 	

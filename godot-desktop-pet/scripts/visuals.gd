@@ -140,7 +140,7 @@ func _on_animation_data_play_animation(animation_data: AnimationResource) -> voi
 	current_animation = animation_data
 	frame = 0
 	texture = animation_data.spritesheet
-	hframes = animation_data.frame_amount
+	hframes = animation_data.frame_count
 	if(!is_running):
 		is_running = true
 		_animate_via_code()

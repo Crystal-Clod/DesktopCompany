@@ -24,14 +24,12 @@
 [sub_resource type="Resource" id="Resource_3p6sd"]
 script = ExtResource("13_y21ce")
 animation_name = "Idle"
-frame_amount = 1
 spritesheet = ExtResource("6_xjgar")
 metadata/_custom_type_script = "uid://c2f58r2jur6le"
 
 [sub_resource type="Resource" id="Resource_m34qp"]
 script = ExtResource("13_y21ce")
 animation_name = "Blink"
-frame_amount = 1
 spritesheet = ExtResource("15_4x6i1")
 metadata/_custom_type_script = "uid://c2f58r2jur6le"
 
@@ -42,7 +40,6 @@ metadata/_custom_type_script = "uid://coef0ue3mi4b8"
 [sub_resource type="Resource" id="Resource_c786b"]
 script = ExtResource("13_y21ce")
 animation_name = "Yap"
-frame_amount = 12
 spritesheet = ExtResource("17_kqn0q")
 metadata/_custom_type_script = "uid://c2f58r2jur6le"
 
