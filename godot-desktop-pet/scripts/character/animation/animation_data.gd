@@ -13,7 +13,7 @@ signal play_animation (animation_data:AnimationResource)
 @export var internal_animations : Dictionary[String,AnimationResourceCollection]
 @export var external_animations : Dictionary[String,AnimationResourceCollection]
 
-@onready var animation_state_machine: AnimationStateMachine = %AnimationStateMachine
+@onready var animation_state_machine : AnimationStateMachine = %AnimationStateMachine
 
 var character_folder : String
 var animation_folder : String

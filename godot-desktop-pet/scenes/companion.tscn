@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://dbf05u0ts8bbh"]
+
+[ext_resource type="Script" uid="uid://c8cppnf3jxc4w" path="res://scripts/character.gd" id="1_0ewvi"]
+[ext_resource type="Script" uid="uid://dbngoo47aks2" path="res://scripts/rigidbody.gd" id="2_5leid"]
+[ext_resource type="AudioStream" uid="uid://stpbfwoh6yuj" path="res://sounds/old_computer_click_finntastico.wav" id="2_y6mwj"]
+[ext_resource type="Texture2D" uid="uid://1a80skx48fj1" path="res://sprites/animations/idle/Idle.png" id="3_lpoen"]
+[ext_resource type="Script" uid="uid://cshigjlwu0gq3" path="res://scripts/visuals.gd" id="3_lrun3"]
+[ext_resource type="Script" uid="uid://c0t4d38mej6fr" path="res://scripts/character/dialogue/dialogue_box_position.gd" id="4_lpoen"]
+[ext_resource type="Script" uid="uid://bi30tkc8vbn0y" path="res://scripts/character/animation/animation_data.gd" id="6_lrun3"]
+[ext_resource type="Script" uid="uid://bvntva275opvt" path="res://scripts/character/animation/state_machine/animation_state_templates/animation_state_data.gd" id="6_mwxs2"]
+[ext_resource type="Script" uid="uid://cp546aqicfayl" path="res://scripts/character/animation/state_machine/animation_state_machine.gd" id="7_vq1jk"]
+[ext_resource type="Resource" uid="uid://due1hx0n4pr62" path="res://resources/animation/idle/idle_animation_array.tres" id="8_rakx2"]
+[ext_resource type="Script" uid="uid://gxojcvy7iqif" path="res://scripts/character/animation/animation_resource_collection.gd" id="8_vq1jk"]
+[ext_resource type="Script" uid="uid://t4pfhheejohf" path="res://scripts/character/dialogue/dialogue_data.gd" id="9_dtdui"]
+[ext_resource type="Resource" uid="uid://ch5jiue42tcuh" path="res://resources/animation/blink/blink_animation_array.tres" id="9_nn6ew"]
+[ext_resource type="Resource" uid="uid://bmirr4tmg2cl6" path="res://resources/animation/yap/yap_animation_array.tres" id="10_1m1uf"]
+[ext_resource type="Script" uid="uid://bp4cvxom4m22g" path="res://scripts/character/sound/sound_data.gd" id="10_ljqbk"]
+[ext_resource type="Resource" uid="uid://b4fi50nfleuy" path="res://resources/animation/idle/idle_animation.tres" id="11_cp1dy"]
+[ext_resource type="Resource" uid="uid://dj1850pukssd4" path="res://resources/animation/blink/blink_animation.tres" id="12_dtdui"]
+[ext_resource type="Script" uid="uid://bi8p4nlwsoe5p" path="res://scripts/character/animation/state_machine/animation_state_templates/animation_with_rules_state.gd" id="13_a6t0d"]
+[ext_resource type="Resource" uid="uid://ci5sryyxvhnwf" path="res://resources/animation/yap/yap_animation.tres" id="13_ljqbk"]
+[ext_resource type="Resource" uid="uid://c6ir2haeyxxqp" path="res://resources/state_rules/timer_rule.tres" id="14_q4x8t"]
+[ext_resource type="Resource" uid="uid://oskxnltuckqf" path="res://resources/state_rules/animation_end_rule.tres" id="16_nvo5u"]
+[ext_resource type="Script" uid="uid://d3oq0yilev5gq" path="res://scripts/character/dialogue/dialogue_set_array.gd" id="20_8ocug"]
+[ext_resource type="Resource" uid="uid://bglc4wge2t7co" path="res://resources/dialogue/intro/intro_dialogue.tres" id="21_j6xid"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_eol6h"]
+random_pitch = 1.122462
+random_volume_offset_db = 5.0
+streams_count = 1
+stream_0/stream = ExtResource("2_y6mwj")
+
+[node name="Companion" type="Node" unique_id=353827523]
+script = ExtResource("1_0ewvi")
+character_name = "Donqui"
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=567629473]
+input_pickable = true
+lock_rotation = true
+freeze = true
+script = ExtResource("2_5leid")
+
+[node name="Visuals" type="Sprite2D" parent="RigidBody2D" unique_id=1636974718 node_paths=PackedStringArray("rigid_body_2d", "character")]
+unique_name_in_owner = true
+texture = ExtResource("3_lpoen")
+script = ExtResource("3_lrun3")
+rigid_body_2d = NodePath("..")
+character = NodePath("../..")
+drag_offset = 20.0
+
+[node name="DialogueBoxPosition" type="Node2D" parent="." unique_id=1544570728]
+unique_name_in_owner = true
+position = Vector2(75, 0)
+script = ExtResource("4_lpoen")
+
+[node name="AnimationData" type="Node" parent="." unique_id=1031113083]
+script = ExtResource("6_lrun3")
+internal_animations = Dictionary[String, ExtResource("8_vq1jk")]({
+"Blink": ExtResource("9_nn6ew"),
+"Idle": ExtResource("8_rakx2"),
+"Yap": ExtResource("10_1m1uf")
+})
+
+[node name="AnimationStateData" type="Node" parent="." unique_id=181360253]
+script = ExtResource("6_mwxs2")
+all_states = Dictionary[String, ExtResource("8_vq1jk")]({
+"Blink": null,
+"Idle": null,
+"Yap": null
+})
+
+[node name="AnimationStateMachine" type="Node" parent="." unique_id=102909671 node_paths=PackedStringArray("initial_state")]
+unique_name_in_owner = true
+script = ExtResource("7_vq1jk")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="AnimationStateMachine" unique_id=738361077 node_paths=PackedStringArray("other_state")]
+script = ExtResource("13_a6t0d")
+rule = ExtResource("14_q4x8t")
+other_state = NodePath("../Blink")
+state_name = "Idle"
+animation_data = ExtResource("11_cp1dy")
+
+[node name="Blink" type="Node" parent="AnimationStateMachine" unique_id=1022762295 node_paths=PackedStringArray("other_state")]
+script = ExtResource("13_a6t0d")
+rule = ExtResource("16_nvo5u")
+other_state = NodePath("../Idle")
+state_name = "Blink"
+animation_data = ExtResource("12_dtdui")
+
+[node name="Yap" type="Node" parent="AnimationStateMachine" unique_id=1434406582 node_paths=PackedStringArray("other_state")]
+script = ExtResource("13_a6t0d")
+rule = ExtResource("16_nvo5u")
+other_state = NodePath("../Idle")
+state_name = "Yap"
+animation_data = ExtResource("13_ljqbk")
+
+[node name="DialogueData" type="Node" parent="." unique_id=1294116259]
+unique_name_in_owner = true
+script = ExtResource("9_dtdui")
+overwrite_files = true
+internal_dialogues = Dictionary[String, ExtResource("20_8ocug")]({
+"Intro": ExtResource("21_j6xid")
+})
+
+[node name="SoundData" type="Node" parent="." unique_id=2060638985]
+script = ExtResource("10_ljqbk")
+
+[node name="ClickPlayer" type="AudioStreamPlayer" parent="SoundData" unique_id=1565444240]
+stream = SubResource("AudioStreamRandomizer_eol6h")
+
+[connection signal="change_scale" from="." to="RigidBody2D/Visuals" method="_on_companion_change_scale"]
+[connection signal="dragging_state" from="." to="RigidBody2D" method="_on_companion_dragging_state"]
+[connection signal="set_scale_instantly" from="." to="RigidBody2D/Visuals" method="_on_companion_set_scale_instantly"]
+[connection signal="character_clicked" from="RigidBody2D/Visuals" to="SoundData" method="_on_visuals_character_clicked"]
+[connection signal="play_animation" from="AnimationData" to="RigidBody2D/Visuals" method="_on_animation_data_play_animation"]

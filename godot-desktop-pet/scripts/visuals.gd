@@ -1,9 +1,7 @@
 extends Sprite2D
 @export var rigid_body_2d: RigidBody2D
 @export var character : Character
-
-@export var dialogue_resource_test : DialogueResource
-@onready var dialogue_box_position: Node2D = %DialogueBoxPosition
+@onready var dialogue_box_position : Node2D = %DialogueBoxPosition
 
 signal character_clicked
 signal character_right_clicked
@@ -131,9 +129,6 @@ func _animate_via_code():
 		#for y in range(area.position.y, area.end.y):
 			#if Color.TRANSPARENT != image.get_pixel(x, y): return false
 		#return true
-func _on_character_change_scale(current_scale: Vector2) -> void:
-	current_scale_step = current_scale
-	_tween_scale()
 
 func _on_animation_data_play_animation(animation_data: AnimationResource) -> void:
 	if animation_data == current_animation:
@@ -148,6 +143,11 @@ func _on_animation_data_play_animation(animation_data: AnimationResource) -> voi
 		_animate_via_code()
 
 
-func _on_character_set_scale_instantly(scale_relative_to_initial_scale: Vector2) -> void:
+func _on_companion_change_scale(current_scale : Vector2)  -> void:
+	current_scale_step = current_scale
+	_tween_scale()
+
+
+func _on_companion_set_scale_instantly(scale_relative_to_initial_scale: Vector2) -> void:
 	current_scale_step = scale_relative_to_initial_scale
 	scale = scale_relative_to_initial_scale

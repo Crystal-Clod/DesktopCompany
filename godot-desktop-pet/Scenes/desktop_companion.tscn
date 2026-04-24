@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dkyvq7llkhfjl"]
 
-[ext_resource type="PackedScene" uid="uid://b06qqkxhudf00" path="res://scenes/base_character.tscn" id="1_h2swe"]
+[ext_resource type="PackedScene" uid="uid://dbf05u0ts8bbh" path="res://scenes/companion.tscn" id="1_5b4v0"]
 [ext_resource type="Script" uid="uid://560muyhjm74r" path="res://scripts/TransparencyWindow.cs" id="2_hppq7"]
 [ext_resource type="Script" uid="uid://cdwrljn85g2u6" path="res://scripts/WindowsDll.cs" id="3_krbfc"]
 [ext_resource type="Script" uid="uid://dlkbjfc12af5c" path="res://scripts/resolution_fix.gd" id="4_f1fbg"]
@@ -13,7 +13,7 @@
 
 [node name="DesktopPet" type="Node" unique_id=149384556]
 
-[node name="BasePet" parent="." unique_id=189861490 instance=ExtResource("1_h2swe")]
+[node name="Companion" parent="." unique_id=353827523 instance=ExtResource("1_5b4v0")]
 
 [node name="NotPlayerStuff" type="Node" parent="." unique_id=2105742958]
 

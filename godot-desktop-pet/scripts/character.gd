@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 class_name Character
 
@@ -7,7 +7,7 @@ signal set_scale_instantly(scale_relative_to_initial_scale : Vector2)
 @warning_ignore("unused_signal")
 signal dragging_state(is_dragging : bool)
 
-@onready var dialogue_data: DialogueData = %DialogueData
+@onready var dialogue_data : DialogueData = %DialogueData
 
 
 @export_custom(PROPERTY_HINT_LINK,"") var current_scale_step : Vector2 = Vector2(1.0,1.0)

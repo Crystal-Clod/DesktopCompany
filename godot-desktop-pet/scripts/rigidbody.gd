@@ -84,7 +84,7 @@ func _clean_polygon(points : PackedVector2Array) -> PackedVector2Array:
 		return PackedVector2Array(cleaned)
 			
 
-func _on_character_dragging_state(is_dragging: bool) -> void:
+func _on_companion_dragging_state(is_dragging: bool) -> void:
 	if !enable_physics:
 		return
 		
