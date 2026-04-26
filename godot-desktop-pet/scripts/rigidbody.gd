@@ -14,12 +14,19 @@ var clear_button = _clear_polygons
 
 var previous_position : Vector2
 
+var initialized : bool = false
+
 func _init() -> void:
 	#maybe move event to here later
+	Events.resolution_set.connect(
+	func():
+		if !initialized:
+			initialized = true
+			position = get_viewport_rect().get_center()
+		)
 	pass
 
 func _ready() -> void:
-	Events.resolution_set.connect(func(): position = get_viewport_rect().get_center())
 	#UNCOMMENT THIS TO SEE COLLISIONS
 	#get_tree().debug_collisions_hint = true
 

@@ -55,6 +55,7 @@ script = ExtResource("4_lpoen")
 
 [node name="AnimationData" type="Node" parent="." unique_id=1031113083]
 script = ExtResource("6_lrun3")
+overwrite_files = true
 internal_animations = Dictionary[String, ExtResource("8_vq1jk")]({
 "Blink": ExtResource("9_nn6ew"),
 "Idle": ExtResource("8_rakx2"),
@@ -63,11 +64,6 @@ internal_animations = Dictionary[String, ExtResource("8_vq1jk")]({
 
 [node name="AnimationStateData" type="Node" parent="." unique_id=181360253]
 script = ExtResource("6_mwxs2")
-all_states = Dictionary[String, ExtResource("8_vq1jk")]({
-"Blink": null,
-"Idle": null,
-"Yap": null
-})
 
 [node name="AnimationStateMachine" type="Node" parent="." unique_id=102909671 node_paths=PackedStringArray("initial_state")]
 unique_name_in_owner = true

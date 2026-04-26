@@ -8,13 +8,14 @@ func _ready() -> void:
 	Events.change_game_screen.connect(
 		func():
 			DisplayServer.window_set_current_screen(current_pointer_screen)
-			Events.game_changed_screens.emit()
+			Events.game_changed_screens.emit(current_pointer_screen)
 			)
 	
 	
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var new_pointer_screen = DisplayServer.get_screen_from_rect(Rect2(DisplayServer.mouse_get_position(), Vector2.ONE))
+	
 	if new_pointer_screen != current_pointer_screen:
 		current_pointer_screen = new_pointer_screen
 		Events.pointer_changed_screens.emit()

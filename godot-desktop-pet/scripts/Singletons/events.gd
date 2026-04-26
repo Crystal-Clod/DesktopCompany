@@ -1,7 +1,8 @@
 extends Node
 
+signal initial_resolution_set
 signal resolution_set
 
 signal pointer_changed_screens
-signal change_game_screen
+signal change_game_screen(screen_number)
 signal game_changed_screens

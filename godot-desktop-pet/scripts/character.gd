@@ -4,7 +4,6 @@ class_name Character
 
 signal change_scale(current_scale: Vector2)
 signal set_scale_instantly(scale_relative_to_initial_scale : Vector2)
-@warning_ignore("unused_signal")
 signal dragging_state(is_dragging : bool)
 
 @onready var dialogue_data : DialogueData = %DialogueData

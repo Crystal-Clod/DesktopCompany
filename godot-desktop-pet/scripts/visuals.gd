@@ -30,8 +30,8 @@ var current_animation : AnimationResource
 func _init() -> void:
 	Events.pointer_changed_screens.connect(
 		func():
-			if sprite_status == Status.Dragging:
-				Events.change_game_screen.emit()
+		if sprite_status == Status.Dragging:
+			Events.change_game_screen.emit()
 	)
 	
 	#Events.resolution_set.connect(resize_character)
