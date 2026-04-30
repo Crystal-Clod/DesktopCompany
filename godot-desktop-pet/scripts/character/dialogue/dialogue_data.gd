@@ -11,9 +11,9 @@ var dialogue_folder : String
 
 func _init() -> void:
 	GameManager.character_files_setup.connect(
-		func(character_folder : String):
+		func(_character_folder : String):
 			await get_tree().physics_frame
-			self.character_folder = character_folder
+			character_folder = _character_folder
 			dialogue_folder = character_folder + "/Dialogue"
 			
 			_save_internal_to_files()
@@ -46,7 +46,6 @@ func _save_internal_to_files():
 		
 
 func _load_external_from_files():
-	#var open_directory = DirAccess.open(dialogue_folder)
 	
 	var files = FileOperations.get_all_files_of_type_from_directory(dialogue_folder, "json")
 	

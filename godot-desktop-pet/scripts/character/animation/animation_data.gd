@@ -8,10 +8,10 @@ signal play_animation (animation_data:AnimationResource)
 @export var use_external : bool
 @export var overwrite_files : bool = false
 
-@export var animations: Dictionary[String,AnimationResourceCollection]
+@export var animations: Dictionary[String,AnimationResourceSet]
 
-@export var internal_animations : Dictionary[String,AnimationResourceCollection]
-@export var external_animations : Dictionary[String,AnimationResourceCollection]
+@export var internal_animations : Dictionary[String,AnimationResourceSet]
+@export var external_animations : Dictionary[String,AnimationResourceSet]
 
 @onready var animation_state_machine : AnimationStateMachine = %AnimationStateMachine
 
@@ -50,12 +50,12 @@ func _save_internal_to_files():
 	for key : String in internal_animations:
 		var animation_resource_folder : String = animation_folder + "/" + key
 		FileOperations.check_if_directory_exists(animation_resource_folder)
-		var animation_resource_collection : AnimationResourceCollection = internal_animations[key]
+		var animation_resource_collection : AnimationResourceSet = internal_animations[key]
 		var files = FileOperations.get_all_files_of_type_from_directory(animation_resource_folder + "/", "json")
 		if !files.has(animation_resource_folder + "/" + key + ".json"):
 			animation_resource_collection.save_to_json(animation_resource_folder + "/" + key)
 		
-		var animation_resources : Array[AnimationResource] = animation_resource_collection.animation_data_collection
+		var animation_resources : Array[AnimationResource] = animation_resource_collection.animation_resources
 		for resource : AnimationResource in animation_resources:
 			if overwrite_files:
 				resource.spritesheet.get_image().save_png(animation_resource_folder + "/" + resource.animation_name + ".png")
@@ -66,13 +66,13 @@ func _load_external_from_files():
 	var directories = FileOperations.get_all_sub_directories(animation_folder + "/")
 	for directory : String in directories:
 		var json = JsonOperations.load_json(directory + "/" + directory.trim_prefix(animation_folder + "/") + ".json" )	
-		var animation_resources : AnimationResourceCollection = AnimationResourceCollection.new()
-		animation_resources.load_from_json(json)
+		var animation_resource_set : AnimationResourceSet = AnimationResourceSet.new()
+		animation_resource_set.load_from_json(json)
 		
 			
 		var image_files = FileOperations.get_all_files_of_type_from_directory(directory + "/", "png")
 		for file : String in image_files:
-			for resource in animation_resources.animation_data_collection:
+			for resource in animation_resource_set.animation_resources:
 				if resource.animation_name == file.trim_prefix(directory + "/").trim_suffix(".png"):
 					var image : Image = Image.new()
 					image.load(file)
@@ -82,7 +82,7 @@ func _load_external_from_files():
 					
 		
 		
-		external_animations.get_or_add(directory.trim_prefix(animation_folder + "/"), animation_resources)
+		external_animations.get_or_add(directory.trim_prefix(animation_folder + "/"), animation_resource_set)
 	
 	print(external_animations)
 
@@ -112,7 +112,7 @@ func _blink():
 
 func _get_animation_data_collection(animation_name : String, which_collection : int):
 	#print(animations)
-	return animations.get(animation_name).animation_data_collection[which_collection]
+	return animations.get(animation_name).animation_resources[which_collection]
 
 func  _finished_dialogue():
 	can_blink = true
@@ -126,5 +126,5 @@ func _start_talking(animation_name : String):
 		animation_name = "Yap"
 	
 	animation_state_machine.play_animation("Yap")
-	play_animation.emit(animations.get(animation_name).animation_data_collection[0])
+	play_animation.emit(animations.get(animation_name).animation_resources[0])
 	can_blink = false

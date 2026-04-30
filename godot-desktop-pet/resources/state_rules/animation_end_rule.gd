@@ -4,8 +4,12 @@ var timer_ended: bool = false
 var timer: SceneTreeTimer
 
 func init(animation_state: AnimationState = null) -> void:
+	if animation_state == null:
+		print("Animation state is null, this should not happen")
+		return
+	
 	timer = Engine.get_main_loop().create_timer(
-		animation_state.animation_data.frame_count/6.0)
+		animation_state.current_animation.frame_count/6.0)
 		
 	timer_ended = false
 	

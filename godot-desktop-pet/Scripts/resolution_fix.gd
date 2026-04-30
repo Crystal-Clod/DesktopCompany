@@ -9,7 +9,6 @@ func _ready():
 func _resize_window(screen_number : int):
 	var window: Window = get_window()
 	var screen_size = DisplayServer.screen_get_size(screen_number)
-	print(screen_size)
 	window.size = Vector2i(screen_size + Vector2i(1, 1))
 	window.position = DisplayServer.screen_get_position()
 	Events.resolution_set.emit()
