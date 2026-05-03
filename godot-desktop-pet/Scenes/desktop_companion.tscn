@@ -10,14 +10,19 @@
 [ext_resource type="Script" uid="uid://df3ax1v8pympa" path="res://scripts/HideFromTaskbar.cs" id="8_8b5ee"]
 [ext_resource type="Script" uid="uid://5k63r8g5mjbw" path="res://scripts/mod_folder.gd" id="9_8oi6f"]
 [ext_resource type="Script" uid="uid://pfh8glbota1p" path="res://scripts/multi_monitor.gd" id="10_tye7p"]
+[ext_resource type="Script" uid="uid://cxsoctn8xnbv2" path="res://scripts/window/window_settings.gd" id="11_nqjpb"]
 
 [node name="DesktopPet" type="Node" unique_id=149384556]
 
 [node name="Companion" parent="." unique_id=353827523 instance=ExtResource("1_5b4v0")]
 
+[node name="WindowSettings" type="Node" parent="." unique_id=1237078222]
+script = ExtResource("11_nqjpb")
+
 [node name="NotPlayerStuff" type="Node" parent="." unique_id=2105742958]
 
 [node name="TransparencyWindow" type="Node" parent="NotPlayerStuff" unique_id=1269539307]
+process_mode = 4
 script = ExtResource("2_hppq7")
 
 [node name="WindowsDLL" type="Node" parent="NotPlayerStuff" unique_id=303487825]
@@ -50,5 +55,24 @@ script = ExtResource("9_8oi6f")
 
 [node name="MultiMonitor" type="Node" parent="NotPlayerStuff" unique_id=1071849187]
 script = ExtResource("10_tye7p")
+
+[node name="Window" type="Window" parent="." unique_id=267318738]
+transparent_bg = true
+oversampling_override = 1.0
+initial_position = 3
+size = Vector2i(1080, 1920)
+current_screen = 0
+visible = false
+exclusive = true
+unresizable = true
+borderless = true
+transparent = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Window" unique_id=222008837]
+texture = ExtResource("5_p4keq")
+
+[node name="WindowSettings" type="Node" parent="Window" unique_id=1440045966]
+process_mode = 4
+script = ExtResource("11_nqjpb")
 
 [connection signal="index_pressed" from="NotPlayerStuff/StatusIndicator/PopupMenu" to="NotPlayerStuff/StatusIndicator/PopupMenu" method="_on_index_pressed"]

@@ -58,6 +58,7 @@ input_pickable = true
 lock_rotation = true
 freeze = true
 script = ExtResource("2_5leid")
+enable_physics = true
 
 [node name="Visuals" type="Sprite2D" parent="RigidBody2D" unique_id=1636974718 node_paths=PackedStringArray("rigid_body_2d", "character")]
 unique_name_in_owner = true

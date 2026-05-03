@@ -14,6 +14,7 @@ func _ready() -> void:
 	
 	
 func _process(_delta: float) -> void:
+	return
 	var new_pointer_screen = DisplayServer.get_screen_from_rect(Rect2(DisplayServer.mouse_get_position(), Vector2.ONE))
 	
 	if new_pointer_screen != current_pointer_screen:
