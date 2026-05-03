@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dkyvq7llkhfjl"]
 
 [ext_resource type="PackedScene" uid="uid://dbf05u0ts8bbh" path="res://scenes/companion.tscn" id="1_5b4v0"]
+[ext_resource type="Script" uid="uid://buic2xwbf3lec" path="res://scripts/window/window_management.gd" id="1_y100m"]
 [ext_resource type="Script" uid="uid://560muyhjm74r" path="res://scripts/TransparencyWindow.cs" id="2_hppq7"]
 [ext_resource type="Script" uid="uid://cdwrljn85g2u6" path="res://scripts/WindowsDll.cs" id="3_krbfc"]
 [ext_resource type="Script" uid="uid://dlkbjfc12af5c" path="res://scripts/resolution_fix.gd" id="4_f1fbg"]
@@ -13,6 +14,7 @@
 [ext_resource type="Script" uid="uid://cxsoctn8xnbv2" path="res://scripts/window/window_settings.gd" id="11_nqjpb"]
 
 [node name="DesktopPet" type="Node" unique_id=149384556]
+script = ExtResource("1_y100m")
 
 [node name="Companion" parent="." unique_id=353827523 instance=ExtResource("1_5b4v0")]
 
@@ -62,17 +64,12 @@ oversampling_override = 1.0
 initial_position = 3
 size = Vector2i(1080, 1920)
 current_screen = 0
-visible = false
-exclusive = true
 unresizable = true
 borderless = true
+always_on_top = true
 transparent = true
+popup_window = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Window" unique_id=222008837]
-texture = ExtResource("5_p4keq")
-
-[node name="WindowSettings" type="Node" parent="Window" unique_id=1440045966]
-process_mode = 4
-script = ExtResource("11_nqjpb")
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1833443303]
 
 [connection signal="index_pressed" from="NotPlayerStuff/StatusIndicator/PopupMenu" to="NotPlayerStuff/StatusIndicator/PopupMenu" method="_on_index_pressed"]
