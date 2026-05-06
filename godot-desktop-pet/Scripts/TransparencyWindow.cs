@@ -1,7 +1,7 @@
-using Godot;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Godot;
 
 
 public partial class TransparencyWindow : Node
@@ -37,10 +37,26 @@ public partial class TransparencyWindow : Node
 	IntPtr hWnd;
 
 	public override void _Ready()
-	{
-		hWnd = GetActiveWindow();
-		SetWindowLong(hWnd, GWL_EXSTYLE, WS_EX_LAYERED);
-		SetLayeredWindowAttributes(hWnd, 0, 0, LWA_COLORKEY);
-		SetWindowPos(hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED | SWP_SHOWWINDOW);
-	}
+    {
+        //hWnd = GetActiveWindow();
+
+
+        //SetWindowLong(hWnd, GWL_EXSTYLE, WS_EX_LAYERED);
+        //SetLayeredWindowAttributes(hWnd, 0, 0, LWA_COLORKEY);
+        //SetWindowPos(hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED | SWP_SHOWWINDOW);
+
+		GD.Print("ActiveWin " +GetActiveWindow());
+        
+        foreach (var id in DisplayServer.GetWindowList())
+        {
+        	GD.Print("ID " + DisplayServer.WindowGetNativeHandle(DisplayServer.HandleType.WindowHandle, id));
+            hWnd = (IntPtr)DisplayServer.WindowGetNativeHandle(DisplayServer.HandleType.WindowHandle, id);
+            SetWindowLong(hWnd, GWL_EXSTYLE, WS_EX_LAYERED);
+            SetLayeredWindowAttributes(hWnd, 0, 0, LWA_COLORKEY);
+            SetWindowPos(hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED | SWP_SHOWWINDOW);
+        }
+        
+
+            
+    }
 }

@@ -11,20 +11,16 @@
 [ext_resource type="Script" uid="uid://df3ax1v8pympa" path="res://scripts/HideFromTaskbar.cs" id="8_8b5ee"]
 [ext_resource type="Script" uid="uid://5k63r8g5mjbw" path="res://scripts/mod_folder.gd" id="9_8oi6f"]
 [ext_resource type="Script" uid="uid://pfh8glbota1p" path="res://scripts/multi_monitor.gd" id="10_tye7p"]
-[ext_resource type="Script" uid="uid://cxsoctn8xnbv2" path="res://scripts/window/window_settings.gd" id="11_nqjpb"]
+[ext_resource type="Script" uid="uid://b4xs1wt7xtg2i" path="res://scripts/window/window.gd" id="12_y100m"]
 
 [node name="DesktopPet" type="Node" unique_id=149384556]
 script = ExtResource("1_y100m")
 
 [node name="Companion" parent="." unique_id=353827523 instance=ExtResource("1_5b4v0")]
 
-[node name="WindowSettings" type="Node" parent="." unique_id=1237078222]
-script = ExtResource("11_nqjpb")
-
 [node name="NotPlayerStuff" type="Node" parent="." unique_id=2105742958]
 
 [node name="TransparencyWindow" type="Node" parent="NotPlayerStuff" unique_id=1269539307]
-process_mode = 4
 script = ExtResource("2_hppq7")
 
 [node name="WindowsDLL" type="Node" parent="NotPlayerStuff" unique_id=303487825]
@@ -58,9 +54,13 @@ script = ExtResource("9_8oi6f")
 [node name="MultiMonitor" type="Node" parent="NotPlayerStuff" unique_id=1071849187]
 script = ExtResource("10_tye7p")
 
-[node name="Window" type="Window" parent="." unique_id=267318738]
+[node name="Window" type="Window" parent="." unique_id=158303960]
 transparent_bg = true
+canvas_item_default_texture_filter = 0
+physics_object_picking = true
+gui_snap_controls_to_pixels = false
 oversampling_override = 1.0
+title = "SecondScreen"
 initial_position = 3
 size = Vector2i(1080, 1920)
 current_screen = 0
@@ -68,8 +68,9 @@ unresizable = true
 borderless = true
 always_on_top = true
 transparent = true
-popup_window = true
+mouse_passthrough = true
+script = ExtResource("12_y100m")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1833443303]
+[node name="Camera2D" type="Camera2D" parent="Window" unique_id=672555937]
 
 [connection signal="index_pressed" from="NotPlayerStuff/StatusIndicator/PopupMenu" to="NotPlayerStuff/StatusIndicator/PopupMenu" method="_on_index_pressed"]

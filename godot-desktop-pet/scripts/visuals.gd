@@ -74,6 +74,7 @@ func _process(_delta):
 		return
 		
 	if Input.is_action_just_pressed("click"):
+		print("clicked")
 		character_clicked.emit()
 		sprite_status = Status.Selected
 		click_position = position - get_global_mouse_position()

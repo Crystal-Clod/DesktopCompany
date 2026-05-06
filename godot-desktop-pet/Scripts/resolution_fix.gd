@@ -13,4 +13,6 @@ func _resize_window(screen_number : int):
 	window.size = safe_rect.size
 	window.position = safe_rect.position
 	
+	print(DisplayServer.get_window_list())
+	
 	Events.resolution_set.emit()
